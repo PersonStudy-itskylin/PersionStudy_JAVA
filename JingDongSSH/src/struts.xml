@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+<struts>
+	
+	 <!-- 处理乱码 -->
+	 <constant name="struts.i18n.encoding" value="UTF-8"/>
+	 <!-- 指定Action请求后缀 -->
+	 <constant name="struts.action.extension" value="action,,html"/>
+	 <!-- 设置浏览器缓存  开发的时候禁止 ， 上线之后要开启 -->
+	 <constant name="struts.static.browserCache" value="true"/>
+	 <!-- XML配置文件修改之后 , 自动重新加载 -->
+	 <constant name="struts.configuration.xml.reload" value="true"/>
+	 <!-- 显示更详细的错误信息 ， 开发模式 -->
+	 <constant name="struts.devMode" value="true"/>
+	 <!-- 是否支持动态方法调用 -->
+	 <constant name="struts.DynamicMethodInvocation" value="true"/>
+	 <!-- 支持静态对象调用 -->
+	 <constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
+	 <!-- 设置文件上传大小 -->
+	 <constant name="struts.multipart.maxSize" value="10485760"/>
+	 <!-- 由Spring创建对象实例 -->
+	 <constant name="struts.objectFactory" value="spring"/>
+	 
+	 <package name="basic" abstract="true" extends="struts-default">
+	 	
+	 	<global-results>
+			<result name="ERROR" type="redirect">/error.jsp</result>
+		</global-results>
+	 	
+	 	<!-- 异常处理 -->
+		<global-exception-mappings>
+			<exception-mapping result="ERROR" exception="java.lang.Exception"/>
+		</global-exception-mappings>
+			 	
+	 </package>
+	 
+	 <include file="struts_users.xml"/>
+	 <include file="struts_goods.xml"/>
+	 <include file="struts_shoppingCar.xml"/>
+	 <include file="struts_order.xml"/>
+	
+</struts>

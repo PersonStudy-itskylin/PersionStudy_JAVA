@@ -1,0 +1,93 @@
+
+@charset "utf-8";
+
+/*
+ * Copyright 2014-2020 hglq4.net. All rights reserved.
+ * Support: http://www.hglq4.net
+ * License: http://www.hglq4.net/license
+ * 
+ * Style - Common
+ * Version: 3.0
+ */
+
+/* ---------- Reset ---------- */
+
+html, body, div, span, a, font, img{
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+	outline: 0px;
+}
+
+html {
+	_width: 100%;
+	_height: 100%;
+	-webkit-text-size-adjust: none;
+	-ms-text-size-adjust: none;
+	_filter: expression(document.execCommand("BackgroundImageCache", false, true));
+}
+
+body {
+	_width: 100%;
+	_height: 100%;
+	font: 12px tahoma, Arial, Verdana, sans-serif;
+	color: #666666;
+	background-color: #ffffff;
+	_background-image: url(about: blank);
+	_background-attachment: fixed;
+}
+
+a {
+	color: #666666;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #ff6600;
+	text-decoration: none;
+}
+
+ul {
+	list-style-type: none;
+}
+
+div.container {
+	width: 950px;
+	margin: 0px auto;
+	*zoom: 1;
+}
+
+div.container .span24 {
+	_display: inline;
+	float: left;
+	margin-right: 10px;
+	overflow: hidden;
+}
+
+div.container .span24 {
+	width: 950px;
+	margin-right: 0px;
+}
+
+/* ---------- Footer ---------- */
+
+div.footer .bottomNav {
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+div.footer .bottomNav li {
+	line-height: 26px;
+	display: inline;
+}
+
+div.footer .bottomNav a {
+	margin: 0px 10px;
+}
+
+div.footer .copyright {
+	line-height: 30px;
+	margin-bottom: 10px;
+	color: #555555;
+	text-align: center;
+}

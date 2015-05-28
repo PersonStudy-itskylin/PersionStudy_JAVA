@@ -1,0 +1,52 @@
+<!--<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+<session-factory>
+
+	 连接数据库 
+	<property name="hibernate.connection.driver_class">
+		oracle.jdbc.driver.OracleDriver
+	</property>
+	<property name="hibernate.connection.url">
+		jdbc:oracle:thin:@localhost:1521:Oracle
+	</property>
+	<property name="hibernate.connection.username">jingdong</property>
+	<property name="hibernate.connection.password">jingdong</property>
+
+	 配置连接池 
+	<property name="c3p0.min_size">10</property>
+	<property name="c3p0.max_size">50</property>
+	<property name="c3p0.timeout">10000</property>
+
+	 显示 SQL 语句 
+	<property name="show_sql">true</property>
+	 格式化 SQL 语句 
+	<property name="format_sql">true</property>
+
+	 配置数据局方言 
+	<property name="hibernate.dialect">
+		org.hibernate.dialect.Oracle9Dialect
+	</property>
+
+	 启动二级缓存 
+	<property name="hibernate.cache.use_second_level_cache">
+		true
+	</property>
+	 配置二级缓存 
+	<property name="hibernate.cache.provider_class">
+		org.hibernate.cache.OSCacheProvider
+	</property>
+	 查询缓存 
+	<property name="hibernate.cache.use_query_cache">true</property>
+
+	 导入实体对象映射配置 
+	<mapping resource="com/softeem/jingdong/entity/UsersBean.hbm.xml" />
+	<mapping resource="com/softeem/jingdong/entity/GoodsBean.hbm.xml" />
+	<mapping resource="com/softeem/jingdong/entity/OrderBean.hbm.xml" />
+
+</session-factory>
+
+</hibernate-configuration>-->

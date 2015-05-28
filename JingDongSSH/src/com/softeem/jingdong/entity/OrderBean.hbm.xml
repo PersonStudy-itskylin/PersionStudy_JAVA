@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.softeem.jingdong.entity">
+	
+	<class name="OrderBean" table="orders">
+		
+		<id name="id" column="id" type="java.lang.Integer">
+			<generator class="sequence">
+				<param name="sequence">order_sequence</param>
+			</generator>
+		</id>
+		
+		<!-- 其他字段 -->
+		<property name="no" column="no_id" type="java.lang.Long" not-null="true"/>
+		<property name="consignee" column="consignee" type="java.lang.String" not-null="true"/>
+		<property name="address" column="address" type="java.lang.String" not-null="true"/>
+		<property name="phone" column="phone" type="java.lang.String" not-null="true"/>
+		<property name="email" column="email" type="java.lang.String" not-null="true"/>
+		<property name="payWay" column="payWay" type="java.lang.String" not-null="true"/>
+		<property name="time" column="times" type="java.util.Date" not-null="true"/>
+		
+		<!-- 订单跟商品 多对多 -->
+		<list name="goodsList" table="order_goods">
+			<!-- 外键列 -->
+			<key column="o_id"/>
+			<!-- 由于List 是有有序集合 ， 会在该表中自动创建一列来记录数据的存储顺序 -->
+			<list-index column="list_index" base="0"/>
+			<many-to-many class="com.softeem.jingdong.entity.GoodsBean" column="g_id"/>
+		</list>
+		
+		<!-- 人跟订单关联 -->
+		<many-to-one name="users" class="com.softeem.jingdong.entity.UsersBean" column="u_id"/>
+		
+	</class>
+	
+</hibernate-mapping>

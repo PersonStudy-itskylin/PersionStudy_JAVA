@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <servlet>
+        <servlet-name>islogin</servlet-name>
+        <servlet-class>cn.login.islogin</servlet-class>
+    </servlet>
+  	<servlet>
+        <servlet-name>isAddliuyan</servlet-name>
+    	<servlet-class>cn.liuyan.isAddliuyan</servlet-class>
+  	</servlet>
+  	<servlet>
+        <servlet-name>isreg</servlet-name>
+    	<servlet-class>cn.reg.isReg</servlet-class>
+  	</servlet>
+  	
+    <servlet-mapping>
+        <servlet-name>islogin</servlet-name>
+        <url-pattern>/islogin</url-pattern>
+    </servlet-mapping>
+  	
+    <servlet-mapping>
+        <servlet-name>isAddliuyan</servlet-name>
+        <url-pattern>/liuyan/isAddliuyan</url-pattern>
+    </servlet-mapping>
+
+  	<servlet-mapping>
+        <servlet-name>isreg</servlet-name>
+        <url-pattern>/reg/isreg</url-pattern>
+  	</servlet-mapping>
+
+</web-app>

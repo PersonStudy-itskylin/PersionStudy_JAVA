@@ -1,0 +1,184 @@
+
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, 
+
+abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, 
+
+strike, strong, sub, sup, tt, var, dd, dl, dt, li, ol, ul, fieldset, form, label, legend, 
+
+table, caption, tbody, tfoot, thead, tr, th, td {
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+	outline: 0px;
+}
+
+html {
+	_width: 100%;
+	_height: 100%;
+	-webkit-text-size-adjust: none;
+	-ms-text-size-adjust: none;
+	_filter: expression(document.execCommand("BackgroundImageCache", false, true));
+}
+
+body {
+	_width: 100%;
+	_height: 100%;
+	font: 12px tahoma, Arial, Verdana, sans-serif;
+	color: #666666;
+	background-color: #ffffff;
+	_background-image: url(about: blank);
+	_background-attachment: fixed;
+}
+
+a {
+	color: #666666;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #ff6600;
+	text-decoration: none;
+}
+
+ul {
+	list-style-type: none;
+}
+
+.body {
+	width: 950px;
+	margin: 0px auto;
+}
+
+.pathBar {
+	width: 992px;
+	height: 29px;
+	line-height: 29px;
+	padding-left: 12px;
+	margin: 0px auto;
+	background: url(../images/single_page_bg.gif) 0px 0px no-repeat;
+}
+
+.pathBar a {
+	margin: 0px 8px;
+	color: #6c6c6c;
+}
+
+
+.bodyLeft {
+	width: 150px;
+	float: left;
+	
+}
+
+.bodyRight {
+
+	width: 760px;
+	float: right;
+	
+}
+
+.bodyLeft .menu {
+	width: 180px;
+	clear: both;
+}
+
+.body.pathBar.top {
+	width: 150px;
+	height: 37px;
+	line-height: 37px;
+	padding-left: 100px;
+	font-size: 14px;
+	font-weight: bold;
+	color: #ffffff;
+	background: url(../images/single_page_bg.gif) 0px -30px no-repeat;
+}
+
+.bodyLeft .menu ul li {
+	width: 150px;
+	height: 33px;
+	line-height: 33px;
+	padding-left: 30px;
+	clear: both;
+	color: #416288;
+	background: url(../images/single_page_bg.gif) 0px -90px no-repeat;
+}
+
+.bodyLeft .menu ul li:hover {
+	background: url(../images/single_page_bg.gif) -180px -90px no-repeat;
+}
+
+.bodyLeft .menu ul li.current {
+	background: url(../images/single_page_bg.gif) -180px -90px no-repeat;
+}
+
+.bodyLeft .menu ul li a {
+	color: #416288;
+}
+
+.bodyRight .content {
+	width: 800px;
+	clear: both;
+}
+
+.bodyRight .content .top {
+	width: 800px;
+	height: 4px;
+	clear: both;
+	overflow: hidden;
+	background: url(../images/single_page_bg.gif) 0px -150px no-repeat;
+}
+
+.bodyRight .content {
+	width: 800px;
+	clear: both;
+}
+
+.bodyRight .content .middle {
+	width: 720px;
+	line-height: 30px;
+	clear: both;
+	padding: 30px 40px;
+	color: #666666;
+	background: url(../images/single_page_y_bg.gif) 0px 0px repeat-y;
+}
+
+.bodyRight .content .middle .title {
+	line-height: 30px;
+	clear: both;
+	font-size: 14px;
+	font-weight: bold;
+	color: #4a628d;
+	border-bottom: 2px solid #4a628d;
+}
+
+.bodyRight .content .bottom {
+	width: 800px;
+	height: 4px;
+	clear: both;
+	overflow: hidden;
+	background: url(../images/single_page_bg.gif) 0px -180px no-repeat;
+}
+
+.bodyRight .detail {
+	width: 720px;
+	clear: both;
+}
+
+.bodyRight .detail .top {
+	width: 720px;
+	height: 10px;
+	clear: both;
+	overflow: hidden;
+	background: url(../images/single_page_bg.gif) 0px -210px no-repeat;
+}
+
+.bodyRight .detail .middle {
+	width: 700px;
+	line-height: 25px;
+	clear: both;
+	padding: 10px;
+	color: #666666;
+	overflow: hidden;
+	background: url(../images/single_page_y_bg.gif) -810px 0px repeat-y;
+}

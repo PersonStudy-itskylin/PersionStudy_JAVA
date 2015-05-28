@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="JingDongSSH"
+  id="myeclipse.1387434461875"
+  context-root="/JingDong_S2SH"
+  j2ee-spec="5.0"
+  archive="JingDongSSH.war">
+  <attributes>
+    <attribute name="webrootdir" value="/WebRoot" />
+  </attributes>
+</project-module>
+

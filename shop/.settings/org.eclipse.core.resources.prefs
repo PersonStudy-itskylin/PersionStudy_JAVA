@@ -1,0 +1,13 @@
+eclipse.preferences.version=1
+encoding//WebRoot/core/coreApp/app/controller/MainController.js=UTF-8
+encoding//WebRoot/core/coreApp/app/view/WestView.js=UTF-8
+encoding//WebRoot/core/coreApp/product/controller/ProductController.js=UTF-8
+encoding//WebRoot/core/coreApp/product/model/ProductModel.js=UTF-8
+encoding//WebRoot/core/coreApp/product/store/ProductStore.js=UTF-8
+encoding//WebRoot/core/coreApp/product/view/ProductForm.js=UTF-8
+encoding//WebRoot/core/coreApp/product/view/ProductGrid.js=UTF-8
+encoding//WebRoot/core/coreApp/product/view/ProductLayout.js=UTF-8
+encoding//WebRoot/core/coreApp/user/view/UserGrid.js=UTF-8
+encoding//WebRoot/js/user_register.js=UTF-8
+encoding//WebRoot/js/userindex.js=UTF-8
+encoding//src/jdbc.properties=UTF-8

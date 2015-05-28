@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+<struts>
+	
+	 <!-- 用户信息 -->
+	 <package name="users" namespace="/users" extends="basic">
+	 	
+	 	<default-class-ref class="UsersAction"></default-class-ref>
+	 	
+	 	<!-- 登录 -->
+	 	<action name="LoginAction" method="login">
+	 		
+	 		<result type="chain">
+	 			<param name="namespace">/goods</param>
+	 			<param name="actionName">IndexAction</param>
+	 			<param name="methodName">getGoodsList</param>
+	 		</result>
+	 		
+	 		<result name="error" type="redirect">/login.jsp</result>
+	 		
+	 	</action>
+	 	
+	 	<!-- 注册 -->
+	 	<action name="RegisterAction"  method="register">
+	 		<result type="redirect">/login.jsp</result>
+	 		<result name="error" type="redirect">/register.jsp</result>
+	 	</action>
+	 	
+	 </package>
+	
+</struts>

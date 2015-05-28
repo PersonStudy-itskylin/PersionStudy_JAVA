@@ -1,0 +1,56 @@
+@CHARSET "utf-8";
+/*
+*
+*
+*
+*
+*
+*
+*author:   ÓÄÀ¶
+*date:2014Äê4ÔÂ16ÈÕ23:58:48
+*
+*/
+body{ background-color:#09f; font-size:12px}
+	.content{width: 250px;height:120px; margin: 0 auto; border: 1px groove #88f; padding: 20px;margin-top:200px;background-color:#69f; }
+	.content caption{padding-bottom: 10px;font-size: 25px;}
+	h1{ font-size:20px;} 
+	input{ border:#999999 1px solid; background-color:#FFFFEE} 
+	.button2{ background-color:#FF9900; border-bottom:#E34A00 2px solid;border-right:#E34A00 2px solid; border-top:#FFB693 2px solid;border-left:#FFB693 2px solid; color:#FFFFFF; font-weight:bold} 
+	dl { 
+	font:normal 12px/15px Arial; 
+	position: relative; 
+	width: 350px; 
+	} 
+	dt {
+	clear: both; 
+	float:left; 
+	width: 80px; 
+	padding: 4px 0 2px 0; 
+	text-align: left; 
+	} 
+	dd { 
+	float: left; 
+	width: 200px; 
+	margin: 0 0 8px 0; 
+	padding-left: 6px; 
+	} 
+	
+	.hint { 
+	display: none; 
+	position: absolute; 
+	right: -160px; 
+	width: 200px; 
+	margin-top: -4px; 
+	border: 1px solid #c93; 
+	padding: 10px 12px; 
+	background: #ffc url(/upload/2009-11/20091104144511488.gif) no-repeat -10px 5px; 
+	} 
+	
+	.hint .hint-pointer { 
+	position: absolute; 
+	left: -10px; 
+	top: 5px; 
+	width: 10px; 
+	height: 19px; 
+	background: url(/upload/2009-11/20091104144511488.gif) left top no-repeat; 
+	} 

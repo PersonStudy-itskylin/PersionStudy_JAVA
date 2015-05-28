@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+<struts>
+	
+	 <package name="goods" namespace="/goods" extends="basic" >
+	 	
+	 	<default-class-ref class="GoodsAction"/>
+	 	
+	 	<!-- 显示首页 -->
+	 	<action name="IndexAction" method="getGoodsList">
+	 		<result>/index.jsp</result>
+	 	</action>
+	 	
+	 	<!-- 显示商品详细信息 -->
+	 	<action name="GoodsInfoAction" method="getGoodsInfo">
+	 		<result>/goods.jsp</result>
+	 	</action>
+	 	
+	 	<!-- 购买商品 -->
+	 	<action name="BuyGoodsAction" method="buyGoods">
+	 		<result type="redirect">/shoppingCar.jsp</result>
+	 	</action>
+	 	
+	 	<!-- 模糊查询商品 -->
+	 	<action name="SearchGoodsAction" method="getSearchGoodsList">
+	 		<result>/index.jsp</result>
+	 	</action>
+	 	
+	 </package>
+	 
+	
+</struts>

@@ -1,0 +1,134 @@
+----------------------商品目录表----------------------------
+CREATE TABLE catalog (             
+  catalag_id NUMBER NOT NULL ,      --目录编号
+  catalag_name VARCHAR2(35),        --目录名称
+  description VARCHAR2(1000),       --目录简介
+  parent_id NUMBER ,                --上级目录       
+  create_time DATE DEFAULT sysdate, --创建时间（默认值）
+  update_time DATE,                 --更新时间
+  creator NUMBER,                   --创建人
+  PRIMARY KEY(catalag_id)           --主键
+);
+
+CREATE SEQUENCE seq_catalog;        --序列
+
+
+-----------------客户信息表-----------------------
+CREATE TABLE customer(
+  customer_id NUMBER NOT NULL,      --客户编号
+  customer_name VARCHAR2(127),      --客户名称
+  sex  VARCHAR2(2) default '男',    --客户性别（默认值）
+  country VARCHAR2(35),             --国家
+  province VARCHAR2(35),            --省份
+  city VARCHAR2(35),                --市区
+  address VARCHAR2(127),            --联系地址
+  postcode VARCHAR2(6),             --邮政编码
+  phone VARCHAR2(18),               --手机号码
+  email VARCHAR2(35),               --邮箱
+  PRIMARY KEY(customer_id)          --主键
+);
+CREATE SEQUENCE seq_customer;       --序列
+
+
+-----------------客户登录表-----------------------
+CREATE TABLE customer_login(
+  id NUMBER NOT NULL,               --自动编号
+  customer_id NUMBER,               --客户编号（参考客户信息表）
+  account VARCHAR2(12),             --账号
+  pwd VARCHAR2(32),                 --密码（MD5加密）
+  status VARCHAR2(2) default '0',   --登录状态（0:禁用，1：登录，2：未登录）
+  create_date date default sysdate, --客户第一次登录日期（默认值）
+  update_date date,                 --客户最新登录日期
+  PRIMARY KEY(id)                   --主键
+);
+CREATE SEQUENCE seq_login;          --序列
+
+
+-----------------员工信息表-----------------------
+CREATE TABLE employee( 
+  employee_id NUMBER NOT NULL,      --员工编号
+  account VARCHAR2(12),             --员工登录账号
+  pwd VARCHAR2(32),                 --密码（MD5加密）
+  role_id VARCHAR2(10) default '1', --角色标识（1：普通，2：管理员）
+  last_login_date date,             --上次登录日期
+  PRIMARY KEY(employee_id)          --主键
+) 
+CREATE SEQUENCE seq_employee;       --序列
+
+---------------------产品表---------------------
+CREATE TABLE product (
+  product_id NUMBER NOT NULL,       --产品编号
+  ProductName VARCHAR2(40),         --产品名称
+  catalag_id NUMBER,                --所属目录（参考目录表）
+  price NUMBER,                     --产品单价
+  stock NUMBER(6),                  --库存
+  img VARCAHR2(60) DEFAULT '/upload/a.jpg',   --产品图片路径（默认值）
+  order_num NUMBER,                 --订单数量（有多少订单中包含该产品）
+  supply VARCHAR2(80),              --产品供应商（例如：宝洁公司）
+  description CLOB,                 --产品描述
+  PRIMARY KEY(product_id)           --主键
+)
+CREATE SEQUENCE seq_product;        --序列
+
+
+---------------------订单表---------------------
+CREATE TABLE orders(
+  order_id  NUMBER NOT NULL,        --自动编号（序列产生）
+  order_no  VARCHAR2(18),           --订单编号（例如：E20140813185015000）
+  customer_id NUMBER,               --客户编号（参考客户信息表）
+  employee_id NUMBER,               --员工编号（参考员工信息表）
+  order_date timestamp,             --订单日期（下订单日期：2014-08-13 18：30）
+  arrivedDate date ,                --收货日期（货物抵达日期：2014-08-15 18：00）
+  sendDate date,                    --发货日期（物流发货时间：2014-08-14 15：00）
+  transportCom VARCHAR2(18) default '申通',  --物流公司名称（默认值）
+  customerName VARCHAR2(40),        --收件人（可能和客户信息不一致）
+  customerAddress VARCHAR2(127),    --收件人地址（可能和客户信息不一致）
+  customerCity VARCHAR2(35),        --收件人所在城市（例如：湖北黄冈）
+  customerHomeTown VARCHAR2(35),    --收件人所在乡镇（例如：湖北浠水清泉镇）
+  customerPostCode VARCHAR2(35),    --收件人邮编
+  customerCountry VARCHAR2(35),     --收件人国别（默认：中国）
+  PRIMARY KEY (order_id)            --主键
+)
+
+CREATE SEQUENCE seq_orders;         --序列
+
+
+---------------------订单明细表---------------------
+CREATE TABLE orderdetail(
+  Order_id NUMBER,                  --订单编号
+  product_id NUMBER,                --产品编号
+  num NUMBER,                       --该产品订单中的数量
+  disCount NUMBER DEFAULT 10,       --折扣（默认：不打折）
+  PRIMARY KEY (Order_id,product_id) --主键
+)
+
+CREATE SEQUENCE seq_orderdetail;         --序列
+
+
+---------------------新闻表---------------------
+CREATE TABLE NEWS
+(
+   n_id        NUMBER NOT NULL,      ---新闻编号
+   title       VARCHAR2(35) NOT NULL,---新闻标题
+   author      VARCHAR2(100) NOT NULL,--发布人
+   CONTENT     CLOB NOT NULL,        ---新闻内容
+   create_time DATE NOT NULL,        ---发布时间
+    NUM         NUMBER NOT NULL,     ---浏览次数
+    c_id        NUMBER NOT NULL      ----新闻类型
+)
+
+CREATE SEQUENCE seq_news;         --序列
+
+---------------------后台目录表---------------------
+CREATE TABLE MENU
+(
+  ID      VARCHAR2(36) NOT NULL,      --主目录编号
+  iconcls VARCHAR2(50),               --目录图标
+  text    VARCHAR2(100),              --目录名字
+  URL     VARCHAR2(200),              --资源地址
+  pid    VARCHAR2(36)                --子目录编号
+)
+
+CREATE SEQUENCE seq_menu;         --序列
+
+

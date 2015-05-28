@@ -1,0 +1,343 @@
+<%@ page contentType="text/html; charset=gb2312" %>
+
+<html>
+<head>
+<title>网上商城首页</title>
+<link href="CSS/stylesheet.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="JS/jsonrpc.js"></script>
+</head>
+<body class="body">
+<table width="780" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" style="border:1px; border-style:solid; border-color:#888888">
+  <tr>
+    <td width="20">&nbsp;</td>
+    <TD height="50" align="right" valign="bottom">
+		<IMG src="images/icon_login.gif" align="absmiddle"> 
+		<INPUT id="qKey" name="qKey" value="商品关键字"> 
+		<SELECT id="category" name="category">
+			<option value="0">所有商品</option>
+			<option value="0">所有商品</option>
+		</SELECT>		
+		<A href=""><IMG src="images/icon_search.gif" align="absmiddle" border="0"></A>    	
+	</TD>
+    <td width="20">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>
+	<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+        <TR align="center">
+          <TD valign="top" width="9"><IMG src="images/icon02.gif"></TD>
+          <TD class="header_menu" align="middle">
+		  	<A href="#"><span class="whiteTitle">商城首页</span></A>
+		  </TD>
+          <TD background="images/Bule_06.gif" width="2"></TD>
+          <TD class="header_menu" align="middle">
+		  	<A href="#"><span class="whiteTitle">购物车管理</span></A>
+		  </TD>
+          <TD background="images/Bule_06.gif" width="2"></TD>
+          <TD class="header_menu" align="middle">
+		  	<A href="#"><span class="whiteTitle">订单管理</span></A>
+		  </TD>
+          <TD background="images/Bule_06.gif" width="2"></TD>
+          <TD class="header_menu" align="middle">
+		  	<A href="#"><span class="whiteTitle">顾客留言</span></A>
+		  </TD>
+          <TD background="images/Bule_06.gif" width="2"></TD>
+          <TD class="header_menu" align="middle">
+		  	<A href="#"><span class="whiteTitle">修改注册资料</span></A>
+		  </TD>
+          <TD vAlign=top width=7><IMG src="images/icon07.gif"></TD>
+        </TR>
+    </TABLE></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="200" valign="top"><TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+            <TR>
+              <TD><IMG src="images/Bule_43.gif"></TD>
+            </TR>
+            <TR>
+              <TD class="C_Item_bg">
+              	<logic:present name="member"></logic:present>
+              	<logic:notPresent name="member">
+	                <html:javascript formName="memLoginForm"/>
+					<html:form action="/login.do?method=login" style="margin:0px;" onsubmit="return validateMemLoginForm(this);">
+					  <TABLE width="100%" height="124" border=0 cellPadding=0 cellSpacing=0>
+	                    <TR>
+	                      <TD class="C_login_Title">会员登录</TD>
+	                    </TR>
+	                    <TR>
+	                      <TD>
+							  <TABLE cellSpacing=0 cellPadding=0 width="90%" align=center border=0>
+		                           <TR height="30">
+		                             <TD class="text">登录账号：
+		                               <input type="text" name="Input" size="10" styleclass="textBox"/></TD>
+		                           </TR>
+		                           <TR height="30">
+		                             <TD class="text">登录密码：
+									  <input type="password" name="" size="10" styleClass="textBox"/>								  </TD>
+		                           </TR>
+		                           <TR height="30">
+		                             <TD class="UserRegster" align="right">
+		                               <input type="submit" value="注册"/>
+								  	<input type="submit" value="登录"/>								  </TD>
+		                         </TR>
+	                      </TABLE> 
+						</TR>
+				  </TABLE>
+
+			  </TD>
+            </TR>
+            <TR>
+              <TD><IMG src="images/Bule_58.gif"></TD>
+            </TR>
+          </TABLE>
+          <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TR>
+                <TD><IMG src="images/Bule_43.gif"></TD>
+              </TR>
+              <TR>
+                <TD class="C_Item_bg" valign="top">
+					<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+					  <TR>
+						<TD class="C_Sort_Title">商品类别</TD>
+					  </TR>
+					  
+					  <TR height="10"><TD></TD></TR>	
+					  
+						  <TR>
+							<TD class="text">
+								&nbsp;<img src="images/cateIcon.gif" border="0">
+								<a href="#">服装</a>
+							</TD>
+						  </TR>	
+						  						  <TR>
+							<TD class="text">
+								&nbsp;<img src="images/cateIcon.gif" border="0">
+								<a href="#">玩具</a>
+							</TD>
+						  </TR>						  		
+
+					</TABLE>
+				</TD>
+              </TR>
+              <TR>
+                <TD><IMG src="images/Bule_58.gif"></TD>
+              </TR>
+          </TABLE></td>
+        <td width="20">&nbsp;</td>
+        <td valign="top"><br>
+		<TABLE class="C_Goods_Title" cellSpacing=0 cellPadding=0 width="100%" border=0>			
+			<TR>
+			  <TD><IMG hspace=5 src="images/Icon_TeJia.gif"></TD>
+			  <TD>&nbsp;</TD>
+			  <TD align="right">
+			  	<A href="#"><IMG hspace=5 src="images/icon_more.gif" border=0></A>
+			  </TD>
+			</TR>
+          </TABLE>
+          <TABLE class="C_Goods_Border" cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TR>
+
+		               <TD valign="top" width="33%">
+					 	<table cellspacing=0 cellpadding=0 width=180 border=0>
+		                 <tr>
+		                   <td align="TOP">
+							<table width="118" height="118" border="0" align="center" cellpadding="0" cellspacing="0" style="border:1px; border-style:solid; border-color:#888888">
+								<tr align="center" valign="middle">
+								  <td><a href="#" target=_blank> <img src="" width="100" height="100" border="0"> </a></td>
+								</tr>
+							</table>
+							</td>
+		                 </tr>
+		                 <tr align="center" height="30">
+		                   <td><a href="#" target=_blank><span  class="blueText">商品名</span></a></td>
+		                 </tr>
+		                 <tr align="center" height="20">
+		                   <td class="text">市场价： ￥$</td>
+		                 </tr>
+		                 <tr align="center" height="20">
+		                   <td class="text">特价￥$</td>
+		                 </tr>
+		                 <tr>
+		                   <td>
+							<a href="#"><img src="images/icon_car.gif" border=0></a> 
+							<a href="#"><img alt="" src="images/icon_buy.gif" border=0></a>
+						  </td>
+		                 </tr>
+		               </table>
+		               </TD>
+		               <TD valign="top" width="33%">
+					 	<table cellspacing=0 cellpadding=0 width=180 border=0>
+		                 <tr>
+		                   <td align="TOP">
+							<table width="118" height="118" border="0" align="center" cellpadding="0" cellspacing="0" style="border:1px; border-style:solid; border-color:#888888">
+								<tr align="center" valign="middle">
+								  <td><a href="#" target=_blank> <img src="" width="100" height="100" border="0"> </a></td>
+								</tr>
+							</table>
+							</td>
+		                 </tr>
+		                 <tr align="center" height="30">
+		                   <td><a href="#" target=_blank><span  class="blueText">商品名</span></a></td>
+		                 </tr>
+		                 <tr align="center" height="20">
+		                   <td class="text">市场价： ￥$</td>
+		                 </tr>
+		                 <tr align="center" height="20">
+		                   <td class="text">特价￥$</td>
+		                 </tr>
+		                 <tr>
+		                   <td>
+							<a href="#"><img src="images/icon_car.gif" border=0></a> 
+							<a href="#"><img alt="" src="images/icon_buy.gif" border=0></a>
+						  </td>
+		                 </tr>
+		               </table>
+		               </TD>	
+					   		               <TD valign="top" width="33%">
+					 	<table cellspacing=0 cellpadding=0 width=180 border=0>
+		                 <tr>
+		                   <td align="TOP">
+							<table width="118" height="118" border="0" align="center" cellpadding="0" cellspacing="0" style="border:1px; border-style:solid; border-color:#888888">
+								<tr align="center" valign="middle">
+								  <td><a href="#" target=_blank> <img src="" width="100" height="100" border="0"> </a></td>
+								</tr>
+							</table>
+							</td>
+		                 </tr>
+		                 <tr align="center" height="30">
+		                   <td><a href="#" target=_blank><span  class="blueText">商品名</span></a></td>
+		                 </tr>
+		                 <tr align="center" height="20">
+		                   <td class="text">市场价： ￥$</td>
+		                 </tr>
+		                 <tr align="center" height="20">
+		                   <td class="text">特价￥$</td>
+		                 </tr>
+		                 <tr>
+		                   <td>
+							<a href="#"><img src="images/icon_car.gif" border=0></a> 
+							<a href="#"><img alt="" src="images/icon_buy.gif" border=0></a>
+						  </td>
+		                 </tr>
+		               </table>
+		               </TD>						   						
+			
+			  </TR>
+          </TABLE><br>		  
+		  <TABLE class=C_Goods_Title cellSpacing=0 cellPadding=0 width="100%" border=0>            
+            <TR>
+              <TD><IMG hspace=5 src="images/NewGoods_03.gif"></TD>
+              <TD>&nbsp;</TD>
+              <TD align=right><A href="#"><IMG hspace=5 src="images/icon_more.gif" border=0></A></TD>
+            </TR>
+          </TABLE>
+          <TABLE class="C_Goods_Border" cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TR>
+           		
+           		
+    
+		               <TD valign="top" width="33%">
+					 	<table cellspacing=0 cellpadding=0 width=180 border=0>
+		                 <tr>
+		                   <td align="TOP">
+							<table width="118" height="118" border="0" align="center" cellpadding="0" cellspacing="0" style="border:1px; border-style:solid; border-color:#888888">
+								<tr align="center" valign="middle">
+								  <td><a href="#" target=_blank> <img src="#" width="100" height="100" border="0"> </a></td>
+								</tr>
+							</table>
+							</td>
+		                 </tr>
+		                 <tr align="center" height="30">
+		                   <td><a href="#" target=_blank><span  class="blueText">商品名</span></a></td>
+		                 </tr>
+		                 <tr align="center" height="20">
+		                   <td class="text">市场价： ￥200 </td>
+		                 </tr>
+		                 <tr>
+		                   <td class=GoodsItem_buy>
+							<a href="#"><img src="images/icon_car.gif" border=0></a> 
+							<a href="#"><img alt="" src="images/icon_buy.gif" border=0></a>
+						  </td>
+		                 </tr>
+		               </table>
+		               </TD>	
+					   
+					   		               <TD valign="top" width="33%">
+					 	<table cellspacing=0 cellpadding=0 width=180 border=0>
+		                 <tr>
+		                   <td align="TOP">
+							<table width="118" height="118" border="0" align="center" cellpadding="0" cellspacing="0" style="border:1px; border-style:solid; border-color:#888888">
+								<tr align="center" valign="middle">
+								  <td><a href="#" target=_blank> <img src="#" width="100" height="100" border="0"> </a></td>
+								</tr>
+							</table>
+							</td>
+		                 </tr>
+		                 <tr align="center" height="30">
+		                   <td><a href="#" target=_blank><span  class="blueText">商品名</span></a></td>
+		                 </tr>
+		                 <tr align="center" height="20">
+		                   <td class="text">市场价： ￥200 </td>
+		                 </tr>
+		                 <tr>
+		                   <td class=GoodsItem_buy>
+							<a href="#"><img src="images/icon_car.gif" border=0></a> 
+							<a href="#"><img alt="" src="images/icon_buy.gif" border=0></a>
+						  </td>
+		                 </tr>
+		               </table>
+		               </TD>
+					   		               <TD valign="top" width="33%">
+					 	<table cellspacing=0 cellpadding=0 width=180 border=0>
+		                 <tr>
+		                   <td align="TOP">
+							<table width="118" height="118" border="0" align="center" cellpadding="0" cellspacing="0" style="border:1px; border-style:solid; border-color:#888888">
+								<tr align="center" valign="middle">
+								  <td><a href="#" target=_blank> <img src="#" width="100" height="100" border="0"> </a></td>
+								</tr>
+							</table>
+							</td>
+		                 </tr>
+		                 <tr align="center" height="30">
+		                   <td><a href="#" target=_blank><span  class="blueText">商品名</span></a></td>
+		                 </tr>
+		                 <tr align="center" height="20">
+		                   <td class="text">市场价： ￥200 </td>
+		                 </tr>
+		                 <tr>
+		                   <td class=GoodsItem_buy>
+							<a href="#"><img src="images/icon_car.gif" border=0></a> 
+							<a href="#"><img alt="" src="images/icon_buy.gif" border=0></a>
+						  </td>
+		                 </tr>
+		               </table>
+		               </TD>					
+
+			  </TR>
+          </TABLE>          
+		  </td>
+      </tr>
+    </table></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="3">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td height="30" bgcolor="#4282CE" class="whiteText" align="center">
+		本电子商城系统，未经授权严禁拷贝</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="20" colspan="3">&nbsp;</td>
+  </tr>
+</table>
+
+</body>
+</html>

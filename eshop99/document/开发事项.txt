@@ -1,0 +1,13 @@
+create TABLE T_USERS(
+     u_id       NUMBER NOT NULL,
+     ACCOUNT    VARCHAR2(12),
+     pwd        VARCHAR2(32),
+     NAME       VARCHAR2(64),
+     sex        VARCHAR2(4),
+     r_id       NUMBER,
+     status     VARCHAR2(2),
+     login_date TIMESTAMP(6) DEFAULT SYSDATE
+ );
+ ALTER TABLE T_USERS
+ADD CONSTRAINT PK_USERS_UID PRIMARY KEY (U_ID)
+

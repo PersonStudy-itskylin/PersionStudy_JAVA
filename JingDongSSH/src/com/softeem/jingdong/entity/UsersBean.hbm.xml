@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.softeem.jingdong.entity">
+	
+	<class name="UsersBean" table="users">
+		
+		<!-- 配置主键 -->
+		<id name="id" column="id" type="java.lang.Integer">
+			<!-- 配置 自动增长序列  主键生成策略 -->
+			<generator class="sequence">
+				<param name="sequence">users_sequence</param>
+			</generator>
+		</id>
+		
+		<!-- 其他字段 -->
+		<property name="name" column="name" type="java.lang.String" not-null="true"/>
+		<property name="password" column="password" type="java.lang.String" not-null="true"/>
+		
+	</class>
+	
+</hibernate-mapping>

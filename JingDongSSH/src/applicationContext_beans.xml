@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" 
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+ xmlns:tx="http://www.springframework.org/schema/tx" 
+ xmlns:aop="http://www.springframework.org/schema/aop"   
+ xsi:schemaLocation=
+ "http://www.springframework.org/schema/beans 
+  http://www.springframework.org/schema/beans/spring-beans-2.5.xsd   
+  http://www.springframework.org/schema/tx
+  http://www.springframework.org/schema/tx/spring-tx-2.5.xsd   
+  http://www.springframework.org/schema/aop 
+  http://www.springframework.org/schema/aop/spring-aop-2.5.xsd"
+  default-lazy-init="true" >
+  
+  <!-- Dao -->
+  <bean id="UsersDao" class="com.softeem.jingdong.dao.impl.UsersDaoImpl">
+  	<property name="template" ref="hibernateTemplate"/>
+  </bean>
+  
+  <bean id="GoodsDao" class="com.softeem.jingdong.dao.impl.GoodsDaoImpl">
+  	<property name="template" ref="hibernateTemplate"/>
+  </bean>
+  
+  <bean id="OrderDao" class="com.softeem.jingdong.dao.impl.OrderDaoImpl">
+  	<property name="template" ref="hibernateTemplate"/>
+  </bean>
+  
+  <!-- Service -->
+  <bean id="UsersService" class="com.softeem.jingdong.service.impl.UsersServiceImpl">
+  	<property name="usersDao" ref="UsersDao"/>
+  </bean>
+  
+  <bean id="GoodsService" class="com.softeem.jingdong.service.impl.GoodsServiceImpl">
+  	<property name="goodsDao" ref="GoodsDao"/>
+  </bean>
+  
+  <bean id="OrderService" class="com.softeem.jingdong.service.impl.OrderServiceImpl">
+  	<property name="orderDao" ref="OrderDao"/>
+  </bean>
+  
+  <!-- Action -->
+  <bean id="UsersAction" class="com.softeem.jingdong.action.UsersAction">
+  	<property name="usersService" ref="UsersService"/>
+  </bean>
+  
+  <bean id="GoodsAction" class="com.softeem.jingdong.action.GoodsAction">
+  	<property name="goodsService" ref="GoodsService"/>
+  	<property name="scs" ref="ShoppingCarService"/>
+  </bean>
+  
+  <bean id="OrderAction" class="com.softeem.jingdong.action.OrderAction">
+  	<property name="orderService" ref="OrderService"/>
+  </bean>
+  
+  <bean id="ShoppingCarService" class="com.softeem.jingdong.service.impl.ShoppingCarServiceImpl">
+  	<property name="goodsDao" ref="GoodsDao"/>
+  </bean>
+  
+  <bean id="ShoppingCarAction" class="com.softeem.jingdong.action.ShoppingCarAction"/>
+  
+</beans>

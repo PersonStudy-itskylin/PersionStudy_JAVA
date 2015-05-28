@@ -1,0 +1,10 @@
+Ext.define('AM.view.address',{
+	extend:'Ext.container.Container',
+	alias:'widget.address',
+	width:220,
+	height:30,
+	label:'地址',
+	items:[
+		{}
+	]
+});

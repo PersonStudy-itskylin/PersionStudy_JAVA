@@ -1,0 +1,36 @@
+
+
+Ext.define('AM.store.userTableSearchStore',{
+	extend:'Ext.data.Store',
+	fields:['id','name'],
+	data:[
+		{id:'userId',name:'用户ID'},
+		{id:'loginName',name:'姓名'},
+		{id:'userName',name:'账号'},
+		{id:'userPwd',name:'密码'},
+		{id:'userSex',name:'性别'},
+		{id:'birthdate',name:'出生日期'},
+		{id:'photo',name:'照片路径'},
+		{id:'contry',name:'国籍'},
+		{id:'province',name:'省份'},
+		{id:'city',name:'城市'},
+		{id:'address',name:'详细地址'},
+		{id:'tel',name:'联系电话'},
+		{id:'email',name:'电子邮箱'},
+		{id:'qq',name:'QQ'},
+		{id:'pwdQuestion1',name:'密保问题'},
+		{id:'pwdAnser1',name:'密保答案'},
+		{id:'married',name:'婚姻情况'},
+		{id:'like',name:'爱好'},
+		{id:'description',name:'自我介绍'},
+		{id:'ethnic',name:'政治面貌'},
+		{id:'education',name:'教育程度'},
+		{id:'job',name:'职业'},
+		{id:'party',name:'名族'},
+		{id:'creator',name:'创建者'},
+		{id:'editor',name:'编辑者'},
+		{id:'createTime',name:'注册时间'},
+		{id:'editeTime',name:'修改时间'},
+		{id:'remark',name:'备注'}
+	]
+});

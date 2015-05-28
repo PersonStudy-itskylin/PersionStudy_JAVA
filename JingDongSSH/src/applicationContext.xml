@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" 
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+ xmlns:tx="http://www.springframework.org/schema/tx" 
+ xmlns:aop="http://www.springframework.org/schema/aop"   
+ xsi:schemaLocation=
+ "http://www.springframework.org/schema/beans 
+  http://www.springframework.org/schema/beans/spring-beans-2.5.xsd   
+  http://www.springframework.org/schema/tx
+  http://www.springframework.org/schema/tx/spring-tx-2.5.xsd   
+  http://www.springframework.org/schema/aop 
+  http://www.springframework.org/schema/aop/spring-aop-2.5.xsd"
+  default-lazy-init="true">
+  
+  <!-- 实例化占位符对象 -->
+  <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+  	<property name="location" value="classpath:jdbc.properties"/>
+  </bean>
+  
+  <!-- 配置一个数据源 -->
+  <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+  	<!-- 配置连接属性 -->
+  	<property name="driverClass" value="${driverClass}"/>
+  	<property name="jdbcUrl" value="${jdbcUrl}"/>
+  	<property name="user" value="${user}"/>
+  	<property name="password" value="${password}"/>
+  	<property name="initialPoolSize" value="${initialPoolSize}"/>
+  	<property name="minPoolSize" value="${minPoolSize}"/>
+  	<property name="maxPoolSize" value="${maxPoolSize}"/>
+  	<property name="checkoutTimeout" value="${checkoutTimeout}"/>
+  </bean>
+  
+  <!-- Spring 整合 Hibernate -->
+  <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+  
+  	<!-- 注入数据源 -->
+  	<property name="dataSource" ref="dataSource"/>
+  	
+  	<!-- 配置 Hibernat 参数 -->
+  	<property name="hibernateProperties">
+  		<props>
+  			<prop key="hibernate.dialect">org.hibernate.dialect.Oracle9Dialect</prop>
+  			<prop key="hibernate.show_sql">true</prop>
+  			<prop key="hibernate.format_sql">true</prop>
+  			<prop key="hibernate.cache.use_second_level_cache">true</prop>
+  			<prop key="hibernate.cache.provider_class">org.hibernate.cache.OSCacheProvider</prop>
+  			<prop key="hibernate.cache.use_query_cache">true</prop>
+  		</props>
+  	</property>
+  	
+  	<!-- 配置实体映射 -->
+  	<property name="mappingResources">
+  		<list>
+  			<value>com/softeem/jingdong/entity/UsersBean.hbm.xml</value>
+  			<value>com/softeem/jingdong/entity/GoodsBean.hbm.xml</value>
+  			<value>com/softeem/jingdong/entity/OrderBean.hbm.xml</value>
+  		</list>
+  	</property>
+  	
+  </bean>
+  
+  <!-- Spring 声明式事务 -->
+  <!-- 事务管理器 -->
+  <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+  	<property name="sessionFactory" ref="sessionFactory"></property>
+  </bean>
+  
+  <!-- 事务通知 -->
+  <tx:advice id="txAdvice" transaction-manager="transactionManager">
+  	<tx:attributes>
+  		<!-- 配置事务属性 ， 查询不需要事务 . 所以配置只读事务 . 但是 增删改 都需要对应的事务操作 -->
+  		<tx:method name="add*" propagation="REQUIRED"/>
+  		<tx:method name="save*" propagation="REQUIRED"/>
+  		<tx:method name="delete*" propagation="REQUIRED"/>
+  		<tx:method name="update*" propagation="REQUIRED"/>
+  		<tx:method name="get*" read-only="true"/>
+  		<tx:method name="find*" read-only="true"/>
+  	</tx:attributes>
+  </tx:advice>
+  
+  <!-- 配置事务切面 -->
+  <aop:config>
+  	<!-- 配置切入点 -->
+  	<aop:pointcut id="txPoint" expression="execution(* com.softeem.jingdong.service..*.*(..))"/>
+  	<aop:advisor advice-ref="txAdvice" pointcut-ref="txPoint"/>
+  </aop:config>
+  
+  <!-- Hibernate 模板类  HibernateTemplate -->
+  <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+  	<property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+  
+</beans>

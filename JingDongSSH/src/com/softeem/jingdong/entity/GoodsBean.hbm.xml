@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.softeem.jingdong.entity">
+	
+	<class name="GoodsBean" table="goods">
+		
+		<!-- 配置主键 -->
+		<id name="id" column="id" type="java.lang.Integer">
+			<!-- 配置 自动增长序列  主键生成策略 -->
+			<generator class="sequence">
+				<param name="sequence">goods_sequence</param>
+			</generator>
+		</id>
+		
+		<!-- 其他字段 -->
+		<property name="type" column="type" type="java.lang.String" not-null="true"/>
+		<property name="title" column="title" type="java.lang.String" not-null="true"/>
+		<property name="price" column="price" type="java.lang.Double" not-null="true"/>
+		<property name="imgURL" column="imgURL" type="java.lang.String" not-null="true"/>
+		<property name="manufacturer" column="manufacturer" type="java.lang.String" not-null="true"/>
+		<property name="evaluate" column="evaluate" type="java.lang.Integer" not-null="true"/>
+		
+	</class>
+	
+</hibernate-mapping>

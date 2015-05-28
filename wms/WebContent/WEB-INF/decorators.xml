@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : decorators.xml
+    Created on : 2008年8月6日, 上午9:41
+    Author     : Administrator
+    Description:
+        Purpose of the document follows.
+-->
+
+<decorators defaultdir="/decorators">
+    <excludes>
+        <pattern>/easyui/*</pattern>
+        <pattern>/css/*</pattern>
+        <pattern>/images/*</pattern>
+        <pattern>/js/*</pattern>
+        <pattern>/views/*</pattern>
+        <pattern>/home/login</pattern>
+        <pattern>/stock/inStock/create*</pattern>
+        <pattern>/stock/inStock/edit*</pattern>
+        <pattern>/stock/rtnPurchase/create*</pattern>
+        <pattern>/stock/rtnPurchase/edit*</pattern>
+        <pattern>/stock/outStock/create*</pattern>
+        <pattern>/stock/outStock/edit*</pattern>
+        <pattern>/stock/transfer/create*</pattern>
+        <pattern>/stock/transfer/edit*</pattern>
+    </excludes>
+    <decorator name="system" page="system.jsp">
+        <pattern>/system/*</pattern>
+    </decorator>
+    <decorator name="data" page="data.jsp">
+        <pattern>/data/*</pattern>
+    </decorator>
+    <decorator name="stock" page="stock.jsp">
+        <pattern>/stock/*</pattern>
+    </decorator>
+    <decorator name="main" page="main.jsp">
+        <pattern>/*</pattern>
+    </decorator>
+</decorators>

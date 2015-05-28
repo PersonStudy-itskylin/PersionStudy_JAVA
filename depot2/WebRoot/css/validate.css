@@ -1,0 +1,32 @@
+/**********************************
+
+Name: 表单验证  Styles
+
+**********************************
+
+*/
+form.cmxform label.error, label.error {
+	!important;	
+	color: red !important;
+	font-size: 13px;
+	font-style: italic;
+	font-weight: normal;
+	margin-left: 3px;
+}
+div.error { !important;	display: none; }
+input.checkbox { !important; border: none }
+input:focus { !important; border: 1px dotted black; }
+input.error { !important; border: 1px dotted red; background:#ffffd5;}
+select.error{ !important; color:#FF0000 !important; background:#ffffd5; }
+textarea.error{!important; border: 1px dotted black; background:#ffffd5;}
+.input-invalid{!important; border: 1px dotted red; background:#ffffd5;}
+.label-error {
+	!important;	
+	color: red;
+	font-size: 13px;
+	font-style: italic;
+	font-weight: normal;
+	margin-left: 3px;
+}
+
+

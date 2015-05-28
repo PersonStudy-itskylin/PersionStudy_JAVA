@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+  <constant name="struts.convention.package.locators" value="action,do"/>
+  <!-- 请求参数的编码方式 -->
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+
+	<!-- 当struts.xml改动后，是否重新加载。默认值为false(生产环境下使用),开发阶段最好打开 -->
+	<constant name="struts.configuration.xml.reload" value="true" />
+
+	<!-- 是否使用struts的开发模式。开发模式会有更多的调试信息。默认值为false(生产环境下使用),开发阶段最好打开 -->
+	<constant name="struts.devMode" value="false" />
+	
+	<constant name="struts.serve.static.browserCache" value="false" />
+	<constant name="struts.i18n.reload" value="true" />
+	<constant name="struts.ui.theme" value="simple" />
+	
+	<constant name="struts.objectFactory" value="spring" />
+	
+</struts>     
