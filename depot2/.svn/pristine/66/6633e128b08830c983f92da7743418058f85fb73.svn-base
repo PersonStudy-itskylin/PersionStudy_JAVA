@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd"> 
+
+
+<configuration>
+	<!-- 这些是极其重要的调整，它们会修改MyBatis在运行时的行为方式。 -->
+	<settings>
+		<!-- 这个配置使全局的映射器启用或禁用缓存。 -->
+		<setting name='cacheEnabled' value="false" />
+	</settings>
+	
+	<typeAliases> 
+	    <!-- 学生别名，这样则可以在其他xml文件中用别名使用该类型，简化代码 -->
+		<typeAlias alias="Account" type="com.ssi.depot.entity.Account"/>
+		<typeAlias alias="Backup" type="com.ssi.depot.entity.Backup"/>
+		
+		<typeAlias alias="Product" type="com.ssi.depot.entity.Product"/>
+		<typeAlias alias="ProductInOut" type="com.ssi.depot.entity.ProductInOut"/>
+		<typeAlias alias="SystemLog" type="com.ssi.depot.entity.SystemLog"/>
+		
+	</typeAliases>
+	
+	<mappers>
+		 <mapper resource="com/ssi/depot/entity/map/Account.xml"/>
+		 <mapper resource="com/ssi/depot/entity/map/Backup.xml"/>
+		 <mapper resource="com/ssi/depot/entity/map/Product.xml"/>
+	</mappers>
+</configuration>

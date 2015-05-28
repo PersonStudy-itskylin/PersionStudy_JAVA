@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssi.depot.dao">
+	<!-- 
+	<resultMap type="com.ssi.depot.entity.Backup" id="baseBackup">
+		<id column="BACID" property="bacid" jdbcType="int" />
+		<result column="ACCID" property="account" jdbcType="int" />
+	</resultMap>
+	 -->
+    <!-- 全体查询数据信息  -->
+    <select id='selectBackupAll' resultType='Backup'>
+        SELECT * FROM TBACKUP
+    </select>
+
+    <!-- 插入数据 -->
+    <insert id='insertBackup' parameterType='Backup' useGeneratedKeys="true" keyProperty="id" >
+      INSERT INTO 
+      	TBACKUP(
+            accid,
+            bacname,
+            bacdescription,
+            bacpath,
+            bacip,
+            bacremark
+        )VALUES(
+            #{accid},
+            #{bacname},
+            #{bacdescription},
+            #{bacpath},
+            #{bacip},
+            #{bacremark}
+	      )
+    </insert>
+    
+    <!-- 删除数据 -->
+    <delete id='deleteBackupById' parameterType='int'>
+        DELETE FROM TBACKUP WHERE bacid = #{bacid}
+    </delete>
+    
+    <!-- 查询数据id  -->
+    <select id='selectBackupById' parameterType='int' resultType='Backup'>
+       SELECT * FROM TBACKUP WHERE bacid = #{bacid}
+    </select>
+    
+    <!-- 修改用户信息 -->
+    <update id="updateBackupById" parameterType="Backup">
+    	UPDATE TBACKUP
+		SET 
+  			accid = #{accid},
+  			bacname = #{bacname},
+  			bacdescription = #{bacdescription},
+  			bacpath = #{bacpath},
+  			bacremark = #{bacremark}
+		WHERE
+			`bacid` = #{bacid}
+    </update>
+    
+    <!-- 分页 -->
+    <select id="selectBackupByPage" resultType="Backup">
+    	SELECT * FROM TBACKUP LIMIT #{start},#{pageSize}
+    </select>
+    
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

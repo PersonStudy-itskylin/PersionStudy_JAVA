@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssi.depot.dao.ISystemLogDAO">
+   <resultMap type="SystemLog" id="supSystemLog">
+		<id column="sysid" property="sysid" jdbcType="int" />
+		<result column="sysname" property="sysname"/>
+		<result column="systime" property="systime"/>
+		<result column="sysip" property="sysip"/>
+		<result column="sysremark" property="sysremark"/>
+		<collection property="supAccount"
+			resultMap="com.ssi.depot.dao.IAccountDAO"
+		/>
+   </resultMap>
+   <!-- 添加数据 -->
+   <insert id="insertSystemLog" parameterType="SystemLog">
+	   	INSERT INTO TSYSTEMLOG(
+	        accid,
+	        sysname,
+	        systime,
+	        sysip,
+	        sysremark
+		)VALUES (
+	        #{accid},
+	        #{sysname},
+	        #{systime},
+	        #{sysip},
+	        #{sysremark}
+	    )
+   </insert>
+   
+   <!-- 通过ID删除 -->
+   <delete id="deleteSystemLog" parameterType="int">
+	   	DELETE 
+	   		FROM TSYSTEMLOG
+		WHERE 
+			sysid = #{sysid}
+   </delete>
+   
+   <!--  通过SystemLog对象的ID 修改 -->
+   <update id="updateSystemLog" parameterType="SystemLog">
+   		UPDATE TSYSTEMLOG
+		SET
+			accid = #{accid},
+			sysname = #{sysname},
+			systime = #{systime},
+			sysip = #{sysip},
+			sysremark = #{sysremark}
+		WHERE 
+			sysid = #{sysid}
+   </update>
+   
+   <!-- 全体查询 -->
+   <select id="selectSystemLogByAll" resultMap="supSystemLog">
+	   	SELECT 
+   			s.sysid,s.sysname,s.systime,s.sysip,s.sysremark,
+       		a.id,a.username,a.`password`,a.realname,a.role,a.description,a.phone,a.tel,a.email,a.qq,a.state,a.ip,a.createTime,a.updateTime,a.remark
+   		FROM TSYSTEMLOG s
+   		LEFT JOIN TACCOUNT a ON s.accid = a.id
+   		ORDER BY s.systime,a.id DESC
+   </select>
+   
+   <!-- 分页查询 -->
+   <select id="selectSystemLogByPage" resultMap="supSystemLog">
+   		SELECT 
+   			s.sysid,s.sysname,s.systime,s.sysip,s.sysremark,
+       		a.id,a.username,a.`password`,a.realname,a.role,a.description,a.phone,a.tel,a.email,a.qq,a.state,a.ip,a.createTime,a.updateTime,a.remark
+   		FROM TSYSTEMLOG s
+   		LEFT JOIN TACCOUNT a ON s.accid = a.id
+   		ORDER BY s.systime,a.id DESC
+   		LIMIT #{start},#{pageSize}
+   </select>
+   
+   <!-- 通过sysID查询 -->
+   <select id="selectSystemLogById" parameterType="int" resultMap="supSystemLog">
+   		SELECT 
+   			s.sysid,s.sysname,s.systime,s.sysip,s.sysremark,
+       		a.id,a.username,a.`password`,a.realname,a.role,a.description,a.phone,a.tel,a.email,a.qq,a.state,a.ip,a.createTime,a.updateTime,a.remark
+   		FROM TSYSTEMLOG s
+   		LEFT JOIN TACCOUNT a ON s.accid = a.id
+   		WHERE
+   			s.sysid = #{sysid}
+   		ORDER BY s.systime,a.id DESC
+   </select>
+   
+</mapper>

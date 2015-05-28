@@ -1,0 +1,236 @@
+/*
+ * Copyright (c) 2005-2020 BeiJing Jidi Information Tech Co.,Ltd. All Rights Reserved.
+ * This software is the confidential and proprietary information of
+ * Founder. You shall not disclose such Confidential Information
+ * and shall use it only in accordance with the terms of the agreements
+ * you entered into with 北京极地信息安全安全有限公司.
+ */
+package com.ssi.depot.action;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+
+import com.ssi.depot.action.common.BaseAction;
+import com.ssi.depot.entity.ProductInOut;
+import com.ssi.depot.service.IProductInOutService;
+
+/** 
+ * CopyRright (c)2005-2014:   <极地信息Jidi Information> 
+ * Project:  depot2
+ * Module ID: <(模块)类编号，可以引用系统设计中的类编号>
+ * Comments:  <对此类的描述，可以引用系统设计中的描述>
+ * JDK version used: <JDK1.6>                              
+ * Namespace: package com.ssi.depot.action;
+ * Author：      林为 
+ * Create Date： 2014年10月28日 上午10:46:58
+ * Modified By：  林为 
+ * Modified Date: 2014年10月28日 上午10:46:58
+ * Why & What is modified:  <修改原因描述>    
+ * Version: v1.0
+ */
+
+@Controller
+@Scope("prototype")
+@ParentPackage("json-default")
+@Namespace("/producthistory")
+public class ProductInOutAction extends BaseAction<ProductInOut> {
+
+	private static final long serialVersionUID = -4333502447249419970L;
+	@Autowired
+	private IProductInOutService productInOutService;
+
+	
+	@Action(value = "addProductInOut",results={@Result(name = SUCCESS,type = "json",params={"root","result"})})
+	public String add(){
+		String proid = request.getParameter("proid");//产品编号
+		String accid = request.getParameter("accid");//用户编号
+		String pioquantity = request.getParameter("pioquantity");//操作数量
+		String piocount = request.getParameter("piocount");//操作次数
+		String piotype = request.getParameter("piotype");//操作类型
+		String piooperation = request.getParameter("piooperation");//灌机人
+		String piooperationnum = request.getParameter("piooperationnum");//灌机点数
+		String pioagreementid = request.getParameter("pioagreementid");//合同编号
+		String pioprojectid = request.getParameter("pioprojectid");//项目编号
+		String pioprojectname = request.getParameter("pioprojectname");//项目名称
+		String piouttime = request.getParameter("piouttime");//操作时间
+		String piointime = request.getParameter("piointime");//归还时间
+		String piosign = request.getParameter("piosign");//签约公司（最终用户）
+		String pioapply = request.getParameter("pioapply");//申请人
+		String piodelivery = request.getParameter("piodelivery");//提货人
+		String pioremark = request.getParameter("pioremark");//操作备注
+		String pioadminsign = request.getParameter("pioadminsign");//库管签字[预留]
+		
+		entity.setProid(Integer.valueOf(proid));
+		entity.setAccid(Integer.valueOf(accid));
+		entity.setPioquantity(Integer.valueOf(pioquantity));
+		entity.setPiocount(Integer.valueOf(piocount));
+		entity.setPiotype(piotype);
+		entity.setPiooperation(piooperation);
+		entity.setPiooperationnum(Integer.valueOf(piooperationnum));
+		entity.setPioagreementid(pioagreementid);
+		entity.setPioprojectid(pioprojectid);
+		entity.setPioprojectname(pioprojectname);
+		entity.setPiouttime(piouttime);
+		entity.setPiointime(piointime);
+		entity.setPiosign(piosign);
+		entity.setPioapply(pioapply);
+		entity.setPioDelivery(piodelivery);
+		entity.setPioremark(pioremark);
+		entity.setPioadminsign(pioadminsign);
+
+		result = productInOutService.addProductInOut(entity);
+		return SUCCESS;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/** 
+	 * 方  法 名: setServletResponse
+	 * 功能描述： 
+	 * 输入参数: ServletResponseAware
+	 * 返 回 值:  ServletResponseAware
+	 * 异    常：      <按照异常名字的字母顺序> 
+	 * 创 建 人:  林为
+	 * 创建日期: 2014年10月28日 上午10:47:15
+	 * 修 改 人:  Blue_Sky
+	 * 修改日期: 2014年10月28日 上午10:47:15
+	 */
+	@Override
+	public void setServletResponse(HttpServletResponse response) {
+		this.response = response;
+	}
+
+	/** 
+	 * 方  法 名: setServletRequest
+	 * 功能描述： 
+	 * 输入参数: ServletRequestAware
+	 * 返 回 值:  ServletRequestAware
+	 * 异    常：      <按照异常名字的字母顺序> 
+	 * 创 建 人:  林为
+	 * 创建日期: 2014年10月28日 上午10:47:15
+	 * 修 改 人:  Blue_Sky
+	 * 修改日期: 2014年10月28日 上午10:47:15
+	 */
+	@Override
+	public void setServletRequest(HttpServletRequest request) {
+		this.request = request;
+	}
+
+	/** 
+	 * 方  法 名: getModel
+	 * 功能描述： 
+	 * 输入参数: ModelDriven<ProductInOut>
+	 * 返 回 值:  ModelDriven<ProductInOut>
+	 * 异    常：      <按照异常名字的字母顺序> 
+	 * 创 建 人:  林为
+	 * 创建日期: 2014年10月28日 上午10:47:15
+	 * 修 改 人:  Blue_Sky
+	 * 修改日期: 2014年10月28日 上午10:47:15
+	 */
+	@Override
+	public ProductInOut getModel() {
+		return entity;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public IProductInOutService getProductInOutService() {
+		return productInOutService;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public void setProductInOutService(IProductInOutService productInOutService) {
+		this.productInOutService = productInOutService;
+	}
+
+}

@@ -1,0 +1,157 @@
+/*
+SQLyog Ultimate v11.24 (32 bit)
+MySQL - 5.5.38 : Database - depot
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`depot` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `depot`;
+
+/*Table structure for table `taccount` */
+
+DROP TABLE IF EXISTS `taccount`;
+
+CREATE TABLE `taccount` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userName` varchar(40) DEFAULT NULL,
+  `password` varchar(64) DEFAULT NULL,
+  `realName` varchar(40) DEFAULT NULL,
+  `role` int(11) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `tel` varchar(20) DEFAULT NULL,
+  `Email` varchar(100) DEFAULT NULL,
+  `QQ` varchar(20) DEFAULT NULL,
+  `State` int(11) DEFAULT NULL,
+  `IP` varchar(128) DEFAULT NULL,
+  `createTime` datetime DEFAULT NULL,
+  `updateTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `remark` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8;
+
+/*Data for the table `taccount` */
+
+LOCK TABLES `taccount` WRITE;
+
+insert  into `taccount`(`ID`,`userName`,`Password`,`realName`,`Role`,`Description`,`Phone`,`Tel`,`Email`,`QQ`,`State`,`IP`,`CreateTime`,`UpdateTime`,`Remark`) values (1,'root','202cb962ac59075b964b07152d234b70','林为',0,'.............................测试................','18612433680','010-12345678','403415171@qq.com','403415171',1,'198.9.9.42','2014-09-26 13:09:37','2014-10-10 11:41:36','测试.................'),(3,'test_linweiga','123','æ³å¥',1,'1e2r6g1w5e6h156g1ns56rtn15s6e1rh56se1rb561edr5b61zs5df61','18612433681','010-987654321','145615156@qq.com','156159452',1,NULL,'2014-10-09 11:12:33','2014-10-15 11:14:33','null'),(4,'test2314','1231234','',NULL,'','','','','',NULL,NULL,'2014-10-09 11:13:14','2014-10-09 11:13:14',NULL),(6,'f15615erg','d0990ff47680b74fb2e882de778cb81a','林为...',15,'123452','1861512358789','15648156','1561512fw5@qq.com','f5615',1,'127.0.0.1','2014-10-10 11:27:18','2014-10-10 11:27:18',NULL),(7,'345ercxz5','9963e2b3708e6e88511e2868c182c20b','4ex6rdycutf',1,'1','4e6xrct','46e57rc','46e75rct','46ex75rct',1,'127.0.0.1','2014-10-10 14:35:36','2014-10-10 14:35:36',NULL),(8,'sadhjearh','7812dbaac9da3f256e5c17d30a987c73','ehgwe5rha',1,'hmj6grnmty','5hrseg','hbstrjs5htj','yrnmtukrh','hmytr',1,'127.0.0.1','2014-10-11 13:40:30','2014-10-11 13:44:56',NULL),(9,'sadh','7812dbaac9da3f256e5c17d30a987c73','ehgwe5rha',1,'htrjke54rehng','5hrseg','hbstrjs5htj','yrnmtukrh','hmytr',1,'127.0.0.1','2014-10-11 13:40:33','2014-10-11 13:44:53',NULL),(10,'sadhje','7812dbaac9da3f256e5c17d30a987c73','ehg',1,'tjye5agwrn','5hrseg','hbstrjs5htj','yrnmtukrh','hmytr',1,'127.0.0.1','2014-10-11 13:40:33','2014-10-11 13:44:53',NULL),(11,'sa','7812dbaac9da3f256e5c17d30a987c73','ehgwe5',1,'j56','5hrseg','hbstrjs5htj','yrnmtukrh','hmytr',1,'127.0.0.1','2014-10-11 13:40:34','2014-10-11 13:44:42',NULL),(12,'sad','7812dbaac9da3f256e5c17d30a987c73','eh',1,'e6u45grn','5hrseg','hbstrjs5htj','yrnmtukrh','hmytr',1,'127.0.0.1','2014-10-11 13:40:34','2014-10-11 13:44:50',NULL),(13,'sadhj','7812dbaac9da3f256e5c17d30a987c73','ehgw',1,'yje54y3wge','5hrseg','hbstrjs5htj','yrnmtukrh','hmytr',1,'127.0.0.1','2014-10-11 13:40:34','2014-10-11 13:44:51',NULL),(14,'sadhjea','7812dbaac9da3f256e5c17d30a987c73','ehgwe',1,'jykur67i5','5hrseg','hbstrjs5htj','yrnmtukrh','hmytr',1,'127.0.0.1','2014-10-11 13:40:35','2014-10-11 13:44:44',NULL),(15,'sadhjear','7812dbaac9da3f256e5c17d30a987c73','ehgwe5',1,'rbnyj','5hrseg','hbstrjs5htj','yrnmtukrh','hmytr',1,'127.0.0.1','2014-10-11 13:40:35','2014-10-11 13:44:48',NULL),(16,'sadhjearht','7812dbaac9da3f256e5c17d30a987c73','ehgwe5r',1,'jyt','5hrseg','hbstrjs5htj','yrnmtukrh','hmytr',1,'127.0.0.1','2014-10-11 13:40:35','2014-10-11 13:44:41',NULL),(17,'sadhjearhts','7812dbaac9da3f256e5c17d30a987c73','ehgwe5rh',1,'y7r6','5hrseg','hbstrjs5htj','yrnmtukrh','hmytr',1,'127.0.0.1','2014-10-11 13:40:37','2014-10-11 13:44:41',NULL),(18,'sadhjearhtsj','7812dbaac9da3f256e5c17d30a987c73','ehgwe5rha',1,'htrn','5hrseg','hbstrjs5htj','yrnmtukrh','hmytr',1,'127.0.0.1','2014-10-11 13:40:37','2014-10-11 13:44:47',NULL),(19,'sadhjearhtsjt','7812dbaac9da3f256e5c17d30a987c73','e',1,'kr67','54yhretyd,uk','hbstrjs5htj','yrnmtukrh','hmytr',1,'127.0.0.1','2014-10-11 13:40:37','2014-10-11 13:44:44',NULL),(20,'sadhjearhtsjtr','7812dbaac9da3f256e5c17d30a987c73','15915',1,'tjrhe','5hrseg','hbstrjs5htj','yrnmtukrh','hmytr',1,'127.0.0.1','2014-10-11 13:40:38','2014-10-11 13:44:47',NULL),(21,'sadhjearhtsjtrs','7812dbaac9da3f256e5c17d30a987c73','snrty6rh',1,'jykur6j','5hrseg','hbstrjs5htj','yrnmtukrh','hmytr',1,'127.0.0.1','2014-10-11 13:40:38','2014-10-11 13:44:41',NULL),(22,'sadhjearhtsjtrse','7812dbaac9da3f256e5c17d30a987c73','myukl76r5thr',1,'5e6u4yr','5hrseg','hbstrjs5htj','yrnmtukrh','hmytr',1,'127.0.0.1','2014-10-11 13:40:38','2014-10-11 13:44:48',NULL),(23,'sadhjearhtsjtrseg','7812dbaac9da3f256e5c17d30a987c73','jyk6r75jry',1,'ngy','5hrseg','hbstrjs5htj','yrnmtukrh','hmytr',1,'127.0.0.1','2014-10-11 13:40:38','2014-10-11 13:44:49',NULL),(77,'sadhjearhtsjtrsegb','7812dbaac9da3f256e5c17d30a987c73','kr6t5jymf,yk',1,'je6u54wy3wtgerntgdyj','5hrseg','hbstrjs5htj','yrnmtukrh','hmytr',1,'127.0.0.1','2014-10-11 13:40:50','2014-10-11 13:44:49',NULL),(78,NULL,'d41d8cd98f00b204e9800998ecf8427e',NULL,NULL,NULL,NULL,NULL,NULL,'bgfhjutrg',NULL,'127.0.0.1','2014-10-15 11:47:19','2014-10-15 11:47:19',NULL),(79,'34564t5y6','e245dc5632ef73e3053f09bed0907c1d','ty54ty56',NULL,NULL,'45y6u','4y56','5y67',NULL,NULL,'127.0.0.1','2014-10-15 11:49:09','2014-10-15 11:49:09',NULL),(80,'2314','81b073de9370ea873f548e31b8adc081','2345',0,NULL,'3245','243','243','21435',1,'127.0.0.1','2014-10-16 16:48:36','2014-10-16 16:48:36','235');
+
+UNLOCK TABLES;
+
+/*Table structure for table `tbackup` */
+
+DROP TABLE IF EXISTS `tbackup`;
+
+CREATE TABLE `tbackup` (
+  `bacid` int(11) NOT NULL AUTO_INCREMENT,
+  `accid` int(11) DEFAULT NULL,
+  `bacName` char(60) DEFAULT NULL,
+  `bacDescription` char(255) DEFAULT NULL,
+  `bacPath` char(255) DEFAULT NULL,
+  `bacIp` char(128) DEFAULT NULL,
+  `bacTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `bacRemark` char(255) DEFAULT NULL,
+  PRIMARY KEY (`bacID`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tbackup` */
+
+LOCK TABLES `tbackup` WRITE;
+
+insert  into `tbackup`(`bacID`,`accid`,`bacName`,`bacDescription`,`bacPath`,`bacIp`,`bacTime`,`bacRemark`) values (1,1,'林为','dsfga561556151561sb56d测试.0.........','C://backup/20141009.bak','192.168.1.1','2014-10-24 15:19:36','ba1e45b1e56br15a6e1rb56a1er5fb6'),(2,1,'fdgaga','dagwegweg','waegwaegweg','192.168.1.1','2014-10-20 14:25:49','5615615'),(4,2,'熊颖','熊颖测试专用','C:\\\\',NULL,'2014-10-07 14:25:46','fdshgere5b1gfndm1t5e6b1gfndhm5tjy6rhebfgnhj'),(5,3,'陈帅','陈帅测试专用~~~陈帅测试专用~~~陈帅测试专用~~~陈帅测试专用~~~陈帅测试专用~~~rehtjse51t6陈帅测试专用~~~','C:\\\\陈帅测试专用~~~\\aaaa.bak','127.0.0.1','2014-10-15 14:25:38','陈帅测试专用~~~陈帅测试专用~~~陈帅测试专用~~~陈帅测试专用~~~陈帅测试专用~~~陈帅测试专用~~~陈帅测试专用~~~陈帅测试专用~~~reht5j61herst6j'),(6,32,'陈帅dfg3','grewerg用~~~rehtjse51t6陈帅测试专用~~~','C:\\\\陈gergwergwerg帅测试专用~~~\\aaaa.bak','127.0.0.1','2014-10-11 14:26:40','陈regwergwerg帅测试专用~~~陈帅测试专用~~~陈帅测试专用~~~陈帅测试专用~~~陈帅测试专用~~~陈帅测试专用~~~陈帅测试专用~~~陈帅测试专用~~~reht5j61herst6j'),(7,1,'2345',NULL,NULL,'127.0.0.1','2014-10-27 15:34:20',NULL);
+
+UNLOCK TABLES;
+
+/*Table structure for table `tproduct` */
+
+DROP TABLE IF EXISTS `tproduct`;
+
+CREATE TABLE `tproduct` (
+  `proid` int(11) NOT NULL AUTO_INCREMENT,
+  `accid` int(11) DEFAULT NULL,
+  `proname` char(60) DEFAULT NULL,
+  `promodel` char(60) DEFAULT NULL,
+  `proprice` decimal(10,2) DEFAULT NULL,
+  `protype` char(60) DEFAULT NULL,
+  `proquantity` decimal(8,0) DEFAULT NULL,
+  `prosource` char(100) DEFAULT NULL,
+  `proeditor` char(60) DEFAULT NULL,
+  `procreatetime` datetime DEFAULT NULL,
+  `proedittime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `proremark` char(255) DEFAULT NULL,
+  PRIMARY KEY (`proID`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tproduct` */
+
+LOCK TABLES `tproduct` WRITE;
+
+insert  into `tproduct`(`proID`,`ACCID`,`proname`,`promodel`,`proprice`,`protype`,`proquantity`,`prosource`,`proeditor`,`procreatetime`,`proedittime`,`proremark`) values (1,1,'43t','23','15915.15','1','3423','343regwh5rghre','herhsth','2014-10-15 13:41:33','2014-10-10 13:41:40','garehtjyr54e5gred'),(2,2,NULL,'60D','8653.56','äº§å','5559','ä½³è½åå','admin','2014-10-21 12:17:18','2014-10-21 12:17:18','testing............'),(3,21,NULL,'ndtmrn','12354.00','1234','23451','35412y52','1234515321','2014-10-20 16:47:33','2014-10-20 16:47:33','531425643erty543'),(4,21,NULL,'ndtmrn','12354.00','1234','23451','35412y52','1234515321','2014-10-20 16:47:34','2014-10-20 16:47:34','531425643erty543'),(5,21,NULL,'ndtmrn','12354.00','1234','23451','35412y52','1234515321','2014-10-20 16:47:35','2014-10-20 16:47:35','531425643erty543'),(6,21,NULL,'ndtmrn','12354.00','1234','23451','35412y52','1234515321','2014-10-20 16:47:35','2014-10-20 16:47:35','531425643erty543'),(7,21,NULL,'ndtmrn','12354.00','1234','23451','35412y52','1234515321','2014-10-20 16:47:35','2014-10-20 16:47:35','531425643erty543'),(8,21,NULL,'ndtmrn','12354.00','1234','23451','35412y52','1234515321','2014-10-20 16:47:35','2014-10-20 16:47:36','531425643erty543'),(9,21,NULL,'ndtmrn','12354.00','1234','23451','35412y52','1234515321','2014-10-20 16:47:36','2014-10-20 16:47:36','531425643erty543'),(12,21,NULL,'ndtmrn','12354.00','1234','23451','35412y52','1234515321','2014-10-20 16:47:36','2014-10-20 16:47:36','531425643erty543'),(13,21,NULL,'ndtmrn','12354.00','1234','23451','35412y52','1234515321','2014-10-20 16:47:36','2014-10-20 16:47:36','531425643erty543'),(14,21,NULL,'ndtmrn','12354.00','1234','23451','35412y52','1234515321','2014-10-20 16:47:37','2014-10-20 16:47:37','531425643erty543'),(15,21,NULL,'ndtmrn','12354.00','1234','23451','35412y52','1234515321','2014-10-20 16:47:37','2014-10-20 16:47:37','531425643erty543'),(16,21,NULL,'ndtmrn','12354.00','1234','23451','35412y52','1234515321','2014-10-20 16:47:37','2014-10-20 16:47:37','531425643erty543'),(17,21,NULL,'ndtmrn','12354.00','1234','23451','35412y52','1234515321','2014-10-20 16:47:37','2014-10-20 16:47:37','531425643erty543'),(18,21,NULL,'ndtmrn','12354.00','1234','23451','35412y52','1234515321','2014-10-20 16:47:37','2014-10-20 16:47:37','531425643erty543'),(19,21,NULL,'ndtmrn','12354.00','1234','23451','35412y52','1234515321','2014-10-20 16:47:37','2014-10-20 16:47:37','531425643erty543'),(21,21,NULL,'ndtmrn','12354.00','1234','23451','35412y52','1234515321','2014-10-20 16:47:38','2014-10-20 16:47:38','531425643erty543'),(22,21,NULL,'ndtmrn','12354.00','1234','23451','35412y52','1234515321','2014-10-20 16:47:38','2014-10-20 16:47:38','531425643erty543'),(23,21,NULL,'ndtmrn','12354.00','1234','23451','35412y52','1234515321','2014-10-20 16:47:38','2014-10-20 16:47:38','531425643erty543'),(24,21,'34t5ye6re','ndtmrn','12354.00','1234','23451','35412y52','1234515321','2014-10-20 16:48:42','2014-10-20 16:48:42','531425643erty543'),(25,55,'67','e4r5t6y','45.00','2435',NULL,NULL,NULL,NULL,'2014-10-24 13:05:31',NULL),(26,23,'324','2345','213.00',NULL,NULL,NULL,NULL,NULL,'2014-10-24 13:05:43',NULL);
+
+UNLOCK TABLES;
+
+/*Table structure for table `tproductinout` */
+
+DROP TABLE IF EXISTS `tproductinout`;
+
+CREATE TABLE `tproductinout` (
+  `pioid` int(11) NOT NULL AUTO_INCREMENT,
+  `proid` int(11) DEFAULT NULL,
+  `accid` int(11) DEFAULT NULL,
+  `pioquantity` int(11) DEFAULT NULL,
+  `pioCount` int(11) DEFAULT NULL,
+  `pioType` char(60) DEFAULT NULL,
+  `pioOperation` char(60) DEFAULT NULL,
+  `pioOperationnum` int(11) DEFAULT NULL,
+  `pioagreementid` char(255) DEFAULT NULL,
+  `pioprojectid` char(255) DEFAULT NULL,
+  `pioprojectname` char(100) DEFAULT NULL,
+  `piouttime` datetime DEFAULT NULL,
+  `piointime` datetime DEFAULT NULL,
+  `piosign` char(100) DEFAULT NULL,
+  `pioapply` char(60) DEFAULT NULL,
+  `pioDelivery` char(60) DEFAULT NULL,
+  `pioremark` char(255) DEFAULT NULL,
+  `pioadminsign` char(60) DEFAULT NULL,
+  PRIMARY KEY (`pioid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `tproductinout` */
+
+LOCK TABLES `tproductinout` WRITE;
+
+UNLOCK TABLES;
+
+/*Table structure for table `tsystemlog` */
+
+DROP TABLE IF EXISTS `tsystemlog`;
+
+CREATE TABLE `tsystemlog` (
+  `sysid` int(11) NOT NULL AUTO_INCREMENT,
+  `accid` int(11) DEFAULT NULL,
+  `sysname` char(60) DEFAULT NULL,
+  `systime` datetime DEFAULT NULL,
+  `sysip` char(128) DEFAULT NULL,
+  `sysremark` char(255) DEFAULT NULL,
+  PRIMARY KEY (`sysid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `tsystemlog` */
+
+LOCK TABLES `tsystemlog` WRITE;
+
+UNLOCK TABLES;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

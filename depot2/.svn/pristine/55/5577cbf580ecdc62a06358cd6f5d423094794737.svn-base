@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Complex DataGrid - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="js/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="js/easyui/themes/default/datagrid.css">
+	<link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="css/table.css">
+	<script type="text/javascript" src="js/easyui/jquery-1.8.0.min.js"></script>
+	<script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="js/easyui/easyui-lang-zh_CN.js"></script>
+    <script src="script/table.js"></script>
+	<script>
+		$(function(){
+			$('#test').datagrid({
+				
+				iconCls:'icon-save',
+				width:'100%',
+				height:350,
+				nowrap: true,
+				autoRowHeight: false,
+				fitColumns:true,
+				striped: true,
+				url:'<c:url value="user/getAccountAll.action/getAccountAll">',
+				collapsible:true,
+				sortName: 'id',
+				sortOrder: 'desc',
+				remoteSort: false,
+				idField:'id',
+				frozenColumns:[[
+	                {field:'ck',checkbox:true},
+	                {title:'用户ID',field:'id',width:80,sortable:true}
+				]],
+				columns:[[
+					{field:'username',title:'用户名',width:80},
+					{field:'password',title:'密码',width:80},
+					{field:'realname',title:'用户姓名',width:80},
+					{field:'description',title:'描述',width:80},
+					{field:'role',title:'权限',width:80,align:'center',
+						formatter:function(value,rec){
+							if(value == '0'){
+								return '<span style="color:red">系统管理员</span>';
+							}else if(value == '1'){
+								return '<span style="color:red">入库员</span>';
+							}else{
+								return '<span style="color:red">出库员</span>';
+							}
+						}
+					},
+					{field:'phone',title:'手机',width:80,rospan:2},
+					{field:'tel',title:'电话',width:80,rospan:2},
+					{field:'state',title:'状态',width:80,rospan:2,
+						formatter:function(value,rec){
+							if(value == '0'){
+								return '<span style="color:#f00">正常</span>';
+							}else if(value == '1'){
+								return '<span style="color:#0f0">停用</span>';
+							}else{
+								return '<span style="color:#00f">异常</span>';
+							}
+						}
+					},
+					{field:'email',title:'邮箱',width:150,rospan:2},
+					{field:'qq',title:'QQ',width:80,rospan:2},
+					{field:'ip',title:'IP地址',width:80,rospan:2},
+					{field:'createtime',title:'创建时间',width:80,rospan:2},
+					{field:'updatetime',title:'修改时间',width:80,rospan:2},
+					{field:'remark',title:'备注',width:80,rospan:2}
+				]],
+				pagination:true,
+				rownumbers:true
+				
+			});
+			$('#btn').linkbutton({
+				plain:true
+			});
+			var p = $('#test').datagrid('getPager');
+			$(p).pagination({
+				onBeforeRefresh:function(){
+					$('#test').datagrid({url:'../user/getAccountAll.action'});
+				}
+			});
+			
+			
+
+			
+		});
+
+
+
+		var actionUrl;
+		function createItem(){
+			$('#myform').form('clear');
+			$('#dlg').dialog('setTitle', '添加用户').dialog('open');
+			actionUrl="insert操作";
+		}
+		function editItem(){
+			
+			var t = $('#test');
+			var row = t.datagrid('getSelected');
+			if (row){
+				$('#myform').form('load', row);
+				$('#dlg').dialog('setTitle', '修改用户').dialog('open');
+				actionUrl = "../user/updateUser.action"+ row.id;
+				ajax:{
+						url:"";
+						type:'post';
+						parms:{
+								id:row.id;
+								
+							}
+					}
+			}
+		}
+		function deleteItem(){
+			var rows=new Array();
+			var t = $('#test');
+			var row = t.datagrid('getSelected');
+			rows.push(row);
+			alert(rows.length);
+/*		if (row) {
+         var rowIndex = $('#test').datagrid('getRowIndex', row);
+         $('#test').datagrid('deleteRow', rowIndex);  
+ }
+ 		console.log(row.length);
+ 		alert('row.length');*/
+
+			for(var i=0;i<rows.length;i++){
+				if (row) {
+				 var rowIndex = $('#test').datagrid('getRowIndex', row);
+				 $('#test').datagrid('deleteRow', rowIndex);  
+ }
+				}
+			/*if(row.length==0){
+			alert(1111111);
+			}else{
+				alert(000000);
+				}*/
+			}
+		function saveItem(){
+			$('#myform').form('submit', {
+				url:'../user/reg.action',
+				success:function(data){
+					console.log(data);
+				/* 	if(data.success){
+						alert(data.msg);
+					}else{
+						alert(data.msg);
+					} */
+				}
+			});
+		}
+
+		function getSelections(){
+			var ids = [];
+			var rows = $('#test').datagrid('getSelections');
+			for(var i=0;i<rows.length;i++){
+				ids.push(rows[i].code);
+			}
+			alert(ids.join(':'));
+		}
+	</script>
+</head>
+<body>
+
+
+	
+	<table id="test">
+    		
+			<a href="#" class="easyui-linkbutton" id="btn" iconCls="icon-add" plain="true" onClick="createItem()" >添加用户</a>
+					
+			<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onClick="deleteItem()">删除用户</a>
+            
+            <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-edit" onClick="editItem()">修改用户</a>
+				
+			<a href="#" class="easyui-linkbutton" iconCls="icon-search" plain="true" onClick="$('#test').datagrid('query')">高级查询</a>
+					
+
+</table>
+<div region="center" border="false" style="padding:10px;">
+			<ul id="mytree" dnd="true" url="datagrid.json"></ul>
+</div>
+
+<div id="dlg" style="width:600px;height:480px;padding:20px 0px 20px 20px;"
+			class="easyui-dialog"
+			title="添加" closed="true" modal="true">
+		<form id="myform" method="post" enctype="application/x-www-form-urlencoded">
+		  <blockquote>
+		    <p>
+		         &nbsp;&nbsp;&nbsp;&nbsp;用户名:             
+		           <input type="text" name="username" class="easyui-validatebox" required="true">    
+		      &nbsp;密码:
+		      <input type="text" name="password" class="easyui-validatebox" required="true"> <br><br>
+		      用户姓名
+		      :
+		      <input type="text" name="realname" class="easyui-validatebox" required="true">
+		      &nbsp;手机:
+		      <input type="text" name="phone" class="easyui-validatebox" required="true"><br><br> 
+		      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;电话:
+		      <input type="text" name="tel" class="easyui-validatebox" required="true">
+		      &nbsp;邮箱:
+		      <input type="text" name="email" class="easyui-validatebox" required="true"><br><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;QQ:
+              <input type="text" name="qq" class="easyui-validatebox" required="true"><br><br>
+              &nbsp; 
+		      &nbsp;&nbsp;&nbsp;&nbsp; 权限:
+		      <select name="role">
+		        <option value="0">系统管理员</option>
+		        <option value="1">入库员</option>
+		        <option value="2">出库员</option>
+	          </select>
+	          <br>
+	          <br>
+	         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               备注:<textarea  name="remark"  rows="5" cols="20"></textarea>
+	          <br><br> 
+	        </p>
+	      </blockquote>
+		</form>
+		<div style="text-align:center;margin-top:20px;">
+			<a href="#" class="easyui-linkbutton" onClick="saveItem()">保存</a>
+			<a href="#" class="easyui-linkbutton" onClick="$('#dlg').dialog('close')">取消</a>
+</div>
+	</div>
+
+
+    
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Complex DataGrid - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="js/easyui/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="js/easyui/themes/default/datagrid.css" />
+	<link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css" />
+	<link rel="stylesheet" type="text/css" href="css/table.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<script type="text/javascript" src="js/easyui/jquery-1.8.0.min.js"></script>
+	<script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="js/easyui/easyui-lang-zh_CN.js"></script>
+    <script src="script/table.js"></script>
+    </style>
+	<script>
+		var editRow = undefined;
+		$(function(){
+			$('#test').datagrid({
+				
+				iconCls:'icon-save',
+				width:'100%',
+				height:350,
+				nowrap: true,
+				autoRowHeight: true,
+				fitColumns:false,
+				showFooter:true,
+				striped: true,
+				collapsible:true,
+				url:'user/getAccountPage.action',
+				sortName: 'id',
+				sortOrder: 'asc',
+				remoteSort: false,
+				idField:'id',
+				frozenColumns:[[
+	                {field:'ck',checkbox:true},
+	                {title:'用户ID',field:'id',width:80,sortable:true}
+				]],
+				columns:[[
+					{field:'username',title:'用户名',width:80},
+					{field:'password',title:'密码',width:80},
+					{field:'realname',title:'用户姓名',width:80},
+					{field:'description',title:'描述',width:80},
+					{field:'role',title:'权限',width:80,align:'center',
+						formatter:function(value,rec){
+							if(value == '0'){
+								return '<span style="color:red">系统管理员</span>';
+							}else if(value == '1'){
+								return '<span style="color:red">入库员</span>';
+							}else{
+								return '<span style="color:red">出库员</span>';
+							}
+						}
+					},
+					{field:'phone',title:'手机',width:80,rospan:2},
+					{field:'tel',title:'电话',width:80,rospan:2},
+					{field:'state',title:'状态',width:80,rospan:2,
+						formatter:function(value,rec){
+							if(value == '0'){
+								return '<span style="color:#f00">正常</span>';
+							}else if(value == '1'){
+								return '<span style="color:#0f0">停用</span>';
+							}else{
+								return '<span style="color:#00f">异常</span>';
+							}
+						}
+					},
+					{field:'email',title:'邮箱',width:150,rospan:2},
+					{field:'qq',title:'QQ',width:80,rospan:2},
+					{field:'ip',title:'IP地址',width:80,rospan:2},
+					{field:'createtime',title:'创建时间',width:80,rospan:2},
+					{field:'updatetime',title:'修改时间',width:80,rospan:2},
+					{field:'remark',title:'备注',width:80,rospan:2}
+				]],
+				toolbar: [{
+            text: '添加', iconCls: 'icon-add', handler: function () {
+                if (editRow != undefined) {
+                    $("#test").datagrid('endEdit', editRow);
+                }
+                if (editRow == undefined) {
+                    $("#myform").form('clear');
+					$("#dlg").dialog('setTitle', '添加用户').dialog('open');
+					document.getElementById("test").value = "add";
+                }
+            }
+        }, '-', {
+            text: '撤销', iconCls: 'icon-redo', handler: function () {
+                editRow = undefined;
+                $("#test").datagrid('rejectChanges');
+                $("#test").datagrid('unselectAll');
+            }
+        }, '-', {
+            text: '删除', iconCls: 'icon-remove', handler: function () {
+				
+                var row = $("#test").datagrid('getSelected');
+				
+				if (row == null) {  
+       			 $.messager.alert("提示", "请选择要删除的行！", "info");  
+    			}  
+    if (row) {  
+        $.messager.confirm('提示', '你确定要删除这条信息吗？', function (r) {  
+            if (r) {
+                $('#myform').form('submit', { 
+                    url: 'user/delAccount.action?id='+row.id,
+                    onSubmit: function () {  
+                        //return $(this).form('validate');  
+                    }, 
+                    success: function (result) {
+                    	var json = $.parseJSON(result);
+                    	console.log(json); 
+                    	if(json.success){
+                    		$('#test').datagrid('reload');
+                    		$.messager.alert("提示", json.msg, "info");
+                    		$("#test").datagrid('unselectAll');
+                    	}else{
+                    		$.messager.alert("提示", json.msg, "err"); 
+                    	}
+                    }  
+  
+                });  
+			}
+            });
+	}
+			}
+        }, '-', {
+            text: '修改', iconCls: 'icon-edit', handler: function () {
+            	//$('#myform').form('clear');
+                var row = $("#test").datagrid('getSelected');
+                if (row !=null) {
+                        $("#myform").form('load', row);
+						$("#dlg").dialog('setTitle', '修改用户').dialog('open');
+                   		
+                		//url = "user/getAccountAll?id=" + row.ID;
+                   		document.getElementById("test").value = "update";
+                    }
+            }
+        }],
+				
+				pagination:true,
+				rownumbers:true,
+				pageNumber:1,
+                pageSize:10,
+                pageList:[5,10,20,50,100,200,500],
+				
+				 onAfterEdit: function (rowIndex, rowData, changes) {
+            editRow = undefined;
+        },
+        onDblClickRow:function (rowIndex, rowData) {
+            if (editRow != undefined) {
+                $("#test").datagrid('endEdit', editRow);
+            }
+ 
+            if (editRow == undefined) {
+                $("#test").datagrid('beginEdit', rowIndex);
+                editRow = rowIndex;
+            }
+        },
+        onClickRow:function(rowIndex,rowData){
+            if (editRow != undefined) {
+                $("#test").datagrid('endEdit', editRow);
+ 
+            }
+            
+        }
+			});
+			$('#btn').linkbutton({
+				plain:true
+			});
+			var p = $('#test').datagrid('getPager');
+			$(p).pagination({
+				onBeforeRefresh:function(){
+					$('#test').datagrid({url:'user/getAccountPage.action'});
+				}
+			});
+			
+			
+
+			
+		});
+
+	function saveUser(){
+	var test = document.getElementById("test").value; 
+	if (test == "add") {  
+         $('#myform').form('submit', {  
+             url:"user/reg.action",
+             
+             success: function (result) {
+                    	if(result){
+                    		$('#test').datagrid('reload');
+                    		$.messager.alert("提示", "恭喜您，信息添加成功！", "info");
+                    		$('#dlg').dialog('close');
+                    		 
+                    	}else{
+                    		$.messager.alert("提示", "恭喜您，信息添加失败！", "err"); 
+                    	}
+                    }  
+         });  
+  
+     }
+     if(test=="update")
+     {  
+         var row = $('#test').datagrid('getSelected');  
+         
+         $('#myform').form('submit', {  
+             url: "user/updateAccount?id="+row.id,  
+             onSubmit: function () {  
+                 return $(this).form('validate');  
+             },  
+              success: function (result) {
+                    	var json = $.parseJSON(result);
+                    	console.log(json); 
+                    	if(json.success){
+                    		
+                    		$.messager.alert("提示", json.msg, "info");
+                    		$('#test').datagrid('reload');
+                    		$('#dlg').dialog('close');
+                    		$("#test").datagrid('unselectAll'); 
+                    	}else{
+                    		$.messager.alert("提示", json.msg, "err"); 
+                    	}
+                    }  
+         });  
+	}
+	}
+	</script>
+</head>
+<body>
+
+
+<div style="width: 100%;height: 100%;">
+
+<table id="test">
+    	
+</table>
+
+</div>	
+<div id="dlg" style="width:500px;height:400px;padding:20px 0px 20px 20px;background-color: #eee;"
+			class="easyui-dialog"
+			title="添加" closed="true" modal="true">
+		<form id="myform" method="post" enctype="application/x-www-form-urlencoded">
+		  <blockquote>
+		    <p>
+		    	
+		         &nbsp;&nbsp;&nbsp;&nbsp;用户名:             
+		           <input type="text" name="username" class="easyui-validatebox" required="true"/>    
+		      &nbsp;密码:
+		      <input type="text" name="password" class="easyui-validatebox" required="true" /> <br/><br/>
+		      用户姓名
+		      :
+		      <input type="text" name="realname" class="easyui-validatebox" required="true" />
+		      &nbsp;手机:
+		      <input type="text" name="phone" class="easyui-validatebox" required="true" /><br/><br/> 
+		      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;电话:
+		      <input type="text" name="tel" class="easyui-validatebox" required="true" />
+		      &nbsp;邮箱:
+		      <input type="text" name="email" class="easyui-validatebox" required="true" /><br/><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;QQ:
+              <input type="text" name="qq" class="easyui-validatebox" required="true" /><br/><br/>
+              &nbsp; 
+		      &nbsp;&nbsp;&nbsp;&nbsp; 权限:
+		      <select name="role">
+		        <option value="0"selected="selected">系统管理员</option>
+		        <option value="1">入库员</option>
+		        <option value="2">出库员</option>
+	          </select>
+	          &nbsp;&nbsp;&nbsp;&nbsp; 
+	          	权限:
+		      <select name="state">
+		        <option value="0" selected="selected" >正常</option>
+		        <option value="1">锁定</option>
+		        <option value="2">欠费</option>
+	          </select>
+	          <br/><br/>
+	                 &nbsp;&nbsp;&nbsp;&nbsp;
+	  描述：<textarea  name="description"  rows="1" cols="20"></textarea>
+	          <br/>
+	          
+	         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               备注:<textarea  name="remark"  rows="1" cols="20"></textarea>
+	          <br/><br/>
+	          <input name="test" id="test" type="hidden" />  
+	  
+	          <input type="hidden" name="ip"/>
+	          <input type="hidden" name="id"/>
+	        </p>
+	          
+	      </blockquote>
+		</form>
+	<div id="dlg-buttons" align="right">  
+     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="saveUser()" style="margin-right:20px;">保存</a>  
+     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="javascript:$('#dlg').dialog('close')" style="margin-right:30px;">关闭</a>  
+ </div> 
+	</div>
+
+
+    
+</body>
+</html>

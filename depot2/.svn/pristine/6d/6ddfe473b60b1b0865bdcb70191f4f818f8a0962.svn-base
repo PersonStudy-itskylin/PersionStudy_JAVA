@@ -1,0 +1,117 @@
+/*
+ * Copyright (c) 2005-2020 BeiJing Jidi Information Tech Co.,Ltd. All Rights Reserved.
+ * This software is the confidential and proprietary information of
+ * Founder. You shall not disclose such Confidential Information
+ * and shall use it only in accordance with the terms of the agreements
+ * you entered into with 北京极地信息安全安全有限公司.
+ */
+package com.ssi.depot.action.common;
+
+import java.lang.reflect.ParameterizedType;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.interceptor.ApplicationAware;
+import org.apache.struts2.interceptor.RequestAware;
+import org.apache.struts2.interceptor.SessionAware;
+import org.jboss.weld.context.ApplicationContext;
+
+import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
+
+
+/**
+ * 
+ * @author 林为
+ *
+ * @param <T> 泛型实体类
+ * @param <TService> 泛型服务类
+ */
+@SuppressWarnings("serial")
+public abstract class BaseAction<T> extends ActionSupport implements
+		RequestAware, ApplicationAware,ModelDriven<T>,SessionAware {
+
+	protected Class<?> clazz = null;
+
+	protected HttpServletRequest request;
+
+	protected HttpServletResponse reponse;
+
+	protected ApplicationContext applicationContext;
+
+	protected Map<String, Object> session;
+
+	protected Map<String, Object> result = new HashMap<String, Object>();
+
+	
+	/**
+	 * 泛型设计
+	 */
+	public BaseAction() {
+		ParameterizedType type=(ParameterizedType)(this.getClass().getGenericSuperclass());
+		clazz=(Class<?>)(type.getActualTypeArguments()[0]);
+	}
+
+
+	public Class<?> getClazz() {
+		return clazz;
+	}
+
+
+	public HttpServletRequest getRequest() {
+		return request;
+	}
+
+
+	public HttpServletResponse getReponse() {
+		return reponse;
+	}
+
+
+	public ApplicationContext getApplicationContext() {
+		return applicationContext;
+	}
+
+
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
+
+	public Map<String, Object> getResult() {
+		return result;
+	}
+
+
+	public void setClazz(Class<?> clazz) {
+		this.clazz = clazz;
+	}
+
+
+	public void setRequest(HttpServletRequest request) {
+		this.request = request;
+	}
+
+
+	public void setReponse(HttpServletResponse reponse) {
+		this.reponse = reponse;
+	}
+
+
+	public void setApplicationContext(ApplicationContext applicationContext) {
+		this.applicationContext = applicationContext;
+	}
+
+
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}
+
+
+	public void setResult(Map<String, Object> result) {
+		this.result = result;
+	}
+}

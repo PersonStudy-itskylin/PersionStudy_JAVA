@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssi.depot.dao.IAccountDAO">
+	<!-- 全体查询数据信息 -->
+	<select id="selectAccountAll" resultType="Account">
+		SELECT * FROM TACCOUNT
+	</select>
+	<!-- 登陆查询 -->
+	<select id="loginAccountByUsernameAndPassword" resultType="Account">
+		SELECT * FROM TACCOUNT WHERE username = #{username} and `password` =
+		#{password}
+	</select>
+	<!-- 插入数据 -->
+	<insert id="insertAccount" parameterType="Account"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO TACCOUNT(
+		username,
+		password,
+		realname,
+		role,
+		description,
+		phone,
+		tel,
+		email,
+		qq,
+		state,
+		ip,
+		createtime,
+		remark
+		)VALUES(
+		#{username},
+		#{password},
+		#{realname},
+		${role},
+		#{description},
+		#{phone},
+		#{tel},
+		#{email},
+		#{qq},
+		${state},
+		#{ip},
+		#{createtime},
+		#{remark})
+	</insert>
+    
+    <!-- 删除数据 -->
+    <delete id="deleteAccountById" parameterType="int">
+        DELETE FROM TACCOUNT WHERE id = #{id}
+    </delete>
+    
+    <!-- 查询数据id  -->
+    <select id="selectAccountById" parameterType="int" resultType="Account">
+        SELECT * FROM TACCOUNT WHERE id = #{id}
+    </select>
+    <!-- 模糊查询 -->
+    <select id="selectAccountBySome" parameterType="Account" resultType="Account">
+    	SELECT * FROM TACCOUNT 
+    	<where> 1=1
+	    	<if test="id !=null">
+	    	  and id like "%"#{id}"%"
+	    	</if>
+	    	<if test="username !=null">
+	    	  and username like "%"#{username}"%"
+	    	</if>
+	    	<if test="realname !=null">
+	    	  and realname like "%"#{realname}"%"
+	    	</if>
+	    	<if test="tel !=null">
+	    	   and tel like "%"#{tel}"%"
+	    	</if>
+	    	<if test="phone !=null">
+	    	  and phone like "%"#{phone}"%"
+	    	</if>
+	    	<if test="role !=null">
+	    	  and role like "%"#{role}"%"
+	    	</if>
+	    	<if test="state !=null">
+	    	  and state like "%"#{state}"%"
+	    	</if>
+	    	<if test="email !=null">
+	    	  and email like "%"#{email}"%"
+	    	</if>
+	    	<if test="qq !=null">
+	    	   and qq like "%"#{qq}"%"
+	    	</if>
+	    	<if test="ip !=null">
+	    	   and ip like "%"#{ip}"%"
+	    	</if>
+	    	<if test="createtime !=null">
+	    	   and createtime like "%"#{createtime}"%"
+	    	</if>
+	    	<if test="updatetime !=null">
+	    	   and updatetime like "%"#{updatetime}"%"
+	    	</if>
+	    	<if test="decription !=null">
+	    	  and decription like "%"#{decription}"%"
+	    	</if>
+	    	<if test="remark !=null">
+	    	   and remark like "%"#{remark}"%"
+	    	</if>
+    	</where> 
+    	
+    </select>
+    <!-- 修改用户信息 -->
+    <update id="updateAccountById" parameterType="Account">
+    	UPDATE  TACCOUNT 
+    	SET 
+    		username=#{username},
+    		password=#{password},
+    		realname=#{realname},
+    		phone=#{phone},
+    		tel=#{tel},
+    		role=#{role},
+    		state=#{state},
+    		description=#{description},
+    		email=#{email},
+    		qq=#{qq},
+    		remark=#{remark}
+    	WHERE 
+    		id=#{id}
+    </update>
+    
+    <!-- limit   分页  -->
+    <select id="selectAccountPage" parameterType="Account" resultType="Account">
+    	SELECT * FROM TACCOUNT LIMIT #{start},#{pageSize}
+    </select>
+
+	
+	</mapper>

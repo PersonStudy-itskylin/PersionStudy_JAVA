@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+   <mapper namespace="com.ssi.depot.dao.IProductDAO">
+
+    <!-- 插入数据 -->
+    <insert id='insertProduct' parameterType='Product' useGeneratedKeys="true" keyProperty="id" >
+     INSERT INTO TPRODUCT(
+      	accid,
+      	proname,
+      	promodel,
+      	proprice,
+      	protype,
+      	proquantity,
+      	prosourse,
+      	proeditor,
+      	procreatetime,
+      	proremark
+      )VALUES(
+      	#{accid},
+      	#{proname},
+      	#{promodel},
+      	#{proprice},
+      	#{protype},
+      	#{proquantity},
+      	#{prosourse},
+      	#{proeditor},
+      	#{procreatetime},
+      	#{proremark}
+      )
+    </insert>
+    
+    <!-- 删除数据 -->
+    <delete id='deleteAccountById' parameterType='int'>
+        DELETE FROM TPRODUCT WHERE proid = ${proid}
+    </delete>
+
+    <!-- 修改用户信息 -->
+    <update id="updateProduct" parameterType="Product">
+    	UPDATE  TPRODUCT 
+    	SET 
+    		accid = ${accid},
+      		proname = #{proname},
+      		promodel = #{promodel},
+      		proprice = ${proprice},
+      		protype = #{protype},
+      		proquantity = ${proquantity},
+      		prosourse = #{prosourse},
+      		proeditor = #{proeditor},
+      		procreatetime = #{procreatetime},
+      		proremark
+    	WHERE 
+    		proid = ${proid}
+    </update>
+    
+    <!-- 全体查询数据信息  -->
+    <select id='selectProductAll' resultType='Product'>
+        SELECT * FROM TPRODUCT
+    </select>
+    
+    <!-- 查询数据id  -->
+    <select id='selectProductById' parameterType='int' resultType='Product'>
+        SELECT * FROM TPRODUCT WHERE proid = ${proid}
+    </select>
+       
+    <!-- 分页查询 -->
+    <select id="selectProductByPage" resultType="Product">
+    	SELECT * FROM TPRODUCT LIMIT ${start},${pageSize}
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

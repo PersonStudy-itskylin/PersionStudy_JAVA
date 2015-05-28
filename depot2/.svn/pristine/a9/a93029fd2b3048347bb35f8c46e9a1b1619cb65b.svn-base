@@ -1,0 +1,23 @@
+/*
+ * ClassName 用户数据集
+ */
+Ext.define('core.user.store.UserSearchStore',{
+	extend:'Ext.data.Store',
+	fields:['id','name'],
+	data:[
+		{id:'id',name:'用户ID'},
+		{id:'username',name:'用户名'},
+		{id:'realname',name:'用户姓名'},
+		{id:'phone',name:'手机'},
+		{id:'role',name:'权限'},
+		{id:'tel',name:'联系电话'},
+		{id:'email',name:'电子邮箱'},
+		{id:'qq',name:'QQ'},
+		{id:'state',name:'状态'},
+		{id:'description',name:'描述'},
+		{id:'ip',name:'注册IP'},
+		{id:'createtime',name:'注册时间'},
+		{id:'updatetime',name:'修改时间'},
+		{id:'remark',name:'备注'}
+	]
+});

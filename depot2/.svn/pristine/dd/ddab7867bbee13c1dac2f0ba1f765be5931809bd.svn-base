@@ -1,0 +1,20 @@
+log4j.rootLogger=info, CONSOLE, PRODUCT 
+
+
+log4j.appender.PRODUCT=org.apache.log4j.DailyRollingFileAppender
+#log4j.appender.PRODUCT=org.apache.log4j.RollingFileAppender
+log4j.appender.PRODUCT.Append=true
+log4j.appender.PRODUCT.DatePattern='.'yyyy-MM-dd
+log4j.appender.PRODUCT.File=C\:/logs/test.log
+#\u4E3A\u65E5\u5FD7\u8F93\u51FA\u6587\u4EF6\u4F4D\u7F6E
+log4j.appender.PRODUCT.Threshold=DEBUG
+#log4j.appender.PRODUCT.Threshold=INFO
+#log4j.appender.PRODUCT.MaxFileSize=20MB
+log4j.appender.PRODUCT.layout=org.apache.log4j.PatternLayout
+log4j.appender.PRODUCT.layout.ConversionPattern=%d{yyyy-MM-dd HH\:mm\:ss} [%-5p] %m%n%n
+
+log4j.logger.com.ibatis=debug
+log4j.logger.com.opensymphony.xwork2=info
+log4j.logger.java.sql=debug
+log4j.logger.org.apache.struts=info
+log4j.logger.org.springframework=info

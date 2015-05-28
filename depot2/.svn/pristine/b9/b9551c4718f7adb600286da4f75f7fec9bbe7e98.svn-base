@@ -1,0 +1,266 @@
+/*
+ * Copyright (c) 2005-2020 BeiJing Jidi Information Tech Co.,Ltd. All Rights Reserved.
+ * This software is the confidential and proprietary information of
+ * Founder. You shall not disclose such Confidential Information
+ * and shall use it only in accordance with the terms of the agreements
+ * you entered into with 北京极地信息安全安全有限公司.
+ */
+package com.ssi.depot.action;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import net.sf.json.JSONArray;
+
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.json.annotations.JSON;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+
+import com.opensymphony.xwork2.ActionSupport;
+import com.ssi.depot.entity.Backup;
+import com.ssi.depot.service.IBackupService;
+
+/** 
+ * CopyRright (c)2005-2014:   <极地信息Jidi Information> 
+ * Project:  depot
+ * Module ID: <(模块)类编号，可以引用系统设计中的类编号>
+ * Comments:  <对此类的描述，可以引用系统设计中的描述>
+ * JDK version used: <JDK1.6>                              
+ * Namespace: package com.ssi.depot.action;
+ * Author：      林为 
+ * Create Date： 2014年10月10日 上午9:53:05
+ * Modified By：  林为 
+ * Modified Date: 2014年10月10日 上午9:53:05
+ * Why & What is modified:  <修改原因描述>    
+ * Version: v1.0
+ */
+/**
+ * @author 林为
+ * 
+ */
+@SuppressWarnings("serial")
+@Controller
+@Scope("prototype")
+@ParentPackage("json-default")
+@Namespace("/backup")
+public class BackupAction extends ActionSupport {
+
+	@Autowired
+	private IBackupService backupService;
+	private Backup backup;
+	private JSONArray result = new JSONArray();
+
+	
+	
+	/**
+	 * 
+	 * 方  法 名: getBackupAllJSON
+	 * 功能描述： 
+	 * 输入参数: BackupAction
+	 * 返 回 值:  BackupAction
+	 * 异    常：      <按照异常名字的字母顺序> 
+	 * 创 建 人:  林为
+	 * 创建日期: 2014年10月11日 下午2:01:20
+	 * 修 改 人:  Blue_Sky
+	 * 修改日期: 2014年10月11日 下午2:01:20
+	 */
+	@Action(value = "getBackupListJSON", results = { 
+			@Result(name = "success", type = "json", params = {"root", "result" })
+		})
+	public String getBackupAllJSON() {
+		boolean flag = false;
+		Map<String, Object> json = new HashMap<String, Object>();
+		List<Backup> backuplist = backupService.findBackupAll();
+		if (backuplist != null) {
+			flag = true;
+		}
+		json.put("success", flag);
+		json.put("totalProperty", backuplist.size());
+		json.put("columns", backuplist);
+		result.add(json);
+		return SUCCESS;
+	}
+
+	
+	/**
+	 * 
+	 * 方  法 名: selectBackupPage
+	 * 功能描述： 得到备份记录分页的json串
+	 * 输入参数: int start ,int pageSize
+	 * 返 回 值:  json list<Backup>
+	 * 异    常：      <按照异常名字的字母顺序> 
+	 * 创 建 人:  林为
+	 * 创建日期: 2014年10月11日 下午1:56:52
+	 * 修 改 人:  Blue_Sky
+	 * 修改日期: 2014年10月11日 下午1:56:52
+	 */
+	@Action(value = "getBackupPage", results = {
+				@Result(name = "success", type = "json", params = {"root", "result" }) })
+	public String selectBackupPage() {
+		boolean flag = false;
+		HttpServletRequest req = ServletActionContext.getRequest();
+		int start = Integer.valueOf(req.getParameter("start"));
+		int pageSize = Integer.valueOf(req.getParameter("pageSize"));
+		Map<String, Object> json = new HashMap<String, Object>();
+		
+		System.out.println("----------- backup    select backupPage(start,pagesize)--------------------------------");
+		
+		List<Backup> backupListPage = backupService.findBackupByPage(start,pageSize);
+		if (backupListPage != null) {
+			flag = true;
+		}
+		json.put("success", flag);
+		json.put("totalProperty", backupService.findBackupAll().size());
+		json.put("columns", backupListPage);
+
+		result.add(json);
+
+		System.out.println("--result-过来了---- " + result.toString());
+		return SUCCESS;
+	}
+	
+	/**
+	 * 
+	 * 方  法 名: addBackup
+	 * 功能描述： 
+	 * 输入参数: BackupAction
+	 * 返 回 值:  JSON MSG
+	 * 异    常：      <按照异常名字的字母顺序> 
+	 * 创 建 人:  林为
+	 * 创建日期: 2014年10月11日 下午2:28:19
+	 * 修 改 人:  Blue_Sky
+	 * 修改日期: 2014年10月11日 下午2:28:19
+	 */
+	@Action(value = "addBackup", results = {
+			@Result(name = "success", type="json",params={"root","result"})})
+	public String addBackup() {
+		System.out.println("---------addBackup    进入新增备份-----------------------");
+		boolean flag = false;
+		String msg = "新增备份失败，请返回重试！";
+		Map<String, Object> json = new HashMap<String, Object>();
+		if (backupService.addBackup(backup)) {
+			flag = true;
+			msg = "新增备份成功！";
+		}
+		json.put("success", flag);
+		json.put("msg", msg);
+		result.add(json);
+		return SUCCESS;
+	}
+
+	
+	/** 
+	 * 方  法 名: updateBackup
+	 * 功能描述： 
+	 * 输入参数: BackupAction
+	 * 返 回 值:  BackupAction
+	 * 异    常：      <按照异常名字的字母顺序> 
+	 * 创 建 人:  林为
+	 * 创建日期: 2014年10月11日 下午2:30:04
+	 * 修 改 人:  Blue_Sky
+	 * 修改日期: 2014年10月11日 下午2:30:04
+	 */
+	@Action(value = "updateBackup", results = {
+			@Result(name = "success", type="json",params={"root","result"})})
+	public String updateBackup() {
+		System.out.println("---------updateBackup    进入修改备份-----------------------");
+		System.out.println("\t\t" + backup.toString());
+		boolean flag = false;
+		String msg = "备份修改失败，请返回重试！";
+		Map<String, Object> json = new HashMap<String, Object>();
+		if (backupService.updateBackupById(backup)){
+			flag = true;
+			msg = "备份修改成功！";
+		}
+		json.put("success", flag);
+		json.put("msg", msg);
+		result.add(json);
+		return SUCCESS;
+	}
+	
+	
+	/** 
+	 * 方  法 名: delBackup
+	 * 功能描述： 
+	 * 输入参数: BackupAction
+	 * 返 回 值:  BackupAction
+	 * 异    常：      <按照异常名字的字母顺序> 
+	 * 创 建 人:  林为
+	 * 创建日期: 2014年10月11日 下午3:27:26
+	 * 修 改 人:  Blue_Sky
+	 * 修改日期: 2014年10月11日 下午3:27:26
+	 */
+	@Action(value = "delBackup", results = {
+				@Result(name = "success", type="json",params={"root","result"})})
+	public String delBackup() {
+		System.out.println("---------delBackup    备份-----------------------");
+		HttpServletRequest req = ServletActionContext.getRequest();
+		boolean flag = false;
+		String msg = "备份删除失败，请重试...";
+		Map<String, Object> json = new HashMap<String, Object>();
+		if (backupService.delBackupById(req.getParameter("bacid"))){
+			flag = true;
+			msg = "备份删除成功！";
+		}
+		json.put("success", flag);
+		json.put("msg", msg);
+		result.add(json);
+		return SUCCESS;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * @return backupService
+	 */
+	public IBackupService getBackupService() {
+		return backupService;
+	}
+
+	/**
+	 * @param backupService
+	 *            要设置的 backupService
+	 */
+	public void setBackupService(IBackupService backupService) {
+		this.backupService = backupService;
+	}
+
+	/**
+	 * @return backup
+	 */
+	public Backup getBackup() {
+		return backup;
+	}
+
+	/**
+	 * @param backup
+	 *            要设置的 backup
+	 */
+	public void setBackup(Backup backup) {
+		this.backup = backup;
+	}
+
+	@JSON
+	public JSONArray getResult() {
+		return result;
+	}
+
+	public void setResult(JSONArray result) {
+		this.result = result;
+	}
+}
