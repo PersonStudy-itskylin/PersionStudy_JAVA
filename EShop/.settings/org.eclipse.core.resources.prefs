@@ -1,9 +1,0 @@
-eclipse.preferences.version=1
-encoding//WebRoot/cart.htm=gb2312
-encoding//WebRoot/default.htm=GB2312
-encoding//WebRoot/submitOrder.htm=gb2312
-encoding//src/com/service/MemServiceImpl.java=UTF-8
-encoding//src/com/service/MerServiceImpl.java=gb2312
-encoding//src/com/service/OrderServiceImpl.java=GB2312
-encoding/src=gb2312
-separateDerivedEncodings=true
